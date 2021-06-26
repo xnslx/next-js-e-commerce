@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "api": {
+    "projectId": "placeholder",
+    "dataset": "placeholder"
+  },
+  "project": {
+    "name": "Next.JS E-commerce example",
+    "basePath": "/studio"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/color-input"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "@sanity/vision"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    },
+    {
+      "implements": "part:@sanity/desk-tool/structure",
+      "path": "./src/deskStructure"
+    }
+  ]
+}
