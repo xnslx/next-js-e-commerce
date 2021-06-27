@@ -27,6 +27,7 @@ import link from "./objects/link";
 import portableText from "./objects/portableText";
 import simplePortableText from "./objects/simplePortableText";
 import contactInfo from "./objects/contactInfo";
+import forms from "./documents/forms";
 
 // Landing page sections
 import hero from "./objects/hero";
@@ -39,40 +40,41 @@ import localeBlockContent from "./locale/BlockContent";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
-  // We name our schema
-  name: "default",
-  // Then proceed to concatenate our document type
-  // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([
-    // The following are document types which will appear
-    // in the studio.
-    product,
-    popup,
-    vendor,
-    category,
-    brand,
-    social,
-    ad,
-    swag,
-    page,
-    route,
-    siteConfig,
-    person,
-    // When added to this list, object types can be used as
-    cta,
-    figure,
-    internalLink,
-    link,
-    hero,
-    imageSection,
-    textSection,
-    portableText,
-    simplePortableText,
-    contactInfo,
-    blockContent,
-    localeText,
-    localeBlockContent,
-    localeString,
-    productVariant,
-  ]),
+    // We name our schema
+    name: "default",
+    // Then proceed to concatenate our document type
+    // to the ones provided by any plugins that are installed
+    types: schemaTypes.concat([
+        // The following are document types which will appear
+        // in the studio.
+        product,
+        popup,
+        vendor,
+        category,
+        brand,
+        social,
+        ad,
+        swag,
+        page,
+        route,
+        siteConfig,
+        person,
+        // When added to this list, object types can be used as
+        cta,
+        figure,
+        internalLink,
+        link,
+        hero,
+        imageSection,
+        textSection,
+        portableText,
+        simplePortableText,
+        contactInfo,
+        blockContent,
+        localeText,
+        localeBlockContent,
+        localeString,
+        productVariant,
+        forms,
+    ]),
 });
