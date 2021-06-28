@@ -1,13 +1,8 @@
 export default {
     name: "forms",
-    title: "Forms",
+    title: "signup",
     type: "document",
     fields: [{
-            name: "name",
-            title: "Name",
-            type: "string",
-        },
-        {
             name: "email",
             title: "Email",
             type: "string",
