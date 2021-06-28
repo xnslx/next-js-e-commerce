@@ -58,6 +58,7 @@ function Login(props) {
             </div>
           ) : null}
           <div>
+            <h3 className="text-center my-4 font-semibold text-3xl">LOG IN</h3>
             <label htmlFor="email" className="text-sm font-normal">
               Email
             </label>

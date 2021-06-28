@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { urlFor } from "../utils/sanity";
 import { getSession, signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
   const [session, loading] = useSession();
+  const router = useRouter();
 
   const cartHandler = (e) => {
     console.log("click");
@@ -11,7 +13,7 @@ function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
     if (session) {
       console.log("you have a session");
     } else {
-      console.log("you are not in the session");
+      router.push("/login");
     }
   };
 

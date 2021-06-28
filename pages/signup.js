@@ -62,6 +62,7 @@ function Signup(props) {
             </div>
           ) : null}
           <div>
+            <h3 className="text-center my-4 font-semibold text-3xl">SIGN UP</h3>
             <label htmlFor="email" className="text-sm font-normal">
               Email
             </label>
