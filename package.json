@@ -17,7 +17,12 @@
   "dependencies": {
     "@sanity/client": "^2.0.1",
     "@sanity/image-url": "^0.140.19",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "mongodb": "^3.6.9",
+    "mongoose": "^5.12.15",
     "next": "^10.0.1",
+    "next-auth": "^3.27.1",
     "next-sanity": "^0.1.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

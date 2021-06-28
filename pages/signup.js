@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-// import { getProviders, useSession, getSession, signIn } from 'next-auth/client';
+import { getProviders, useSession, getSession, signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { sanityClient } from "../utils/sanity";
 
 function Signup(props) {
-  // const [session, loading ] = useSession();
+  //   const [session, loading] = useSession();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
@@ -15,52 +15,35 @@ function Signup(props) {
   const router = useRouter();
 
   async function submitHandler(e) {
-    //   e.preventDefault();
-    //   const enteredEmail = emailInputRef.current.value;
-    //   const enteredPassword = passwordInputRef.current.value;
-    //   const enteredConfirmPassword = confirmPasswordInputRef.current.value;
+    e.preventDefault();
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
+    const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
-    //   const response = await fetch('/api/auth/signup', {
-    //       method: 'POST',
-    //       body: JSON.stringify({enteredEmail, enteredPassword, enteredConfirmPassword}),
-    //       headers: {
-    //           'Content-Type': 'application/json'
-    //       }
-    //   })
-
-    //   const data = await response.json();
-    //   if (!response.ok) {
-    //       console.log(data)
-    //     }
-    //   console.log('data', data)
-
-    //   if(data.message !== null) {
-    //       setError(data.message)
-    //   }
-    //   if(response.ok){
-    //       router.replace('/signin')
-    //   }
-    const mutations = [
-      {
-        createOrReplace: {
-          _id: "123",
-          _type: "cms.article",
-          title: "An article",
-        },
-      },
-    ];
-
-    fetch(`https://fbt7an56.api.sanity.io/v2021-06-07/data/mutate/production`, {
-      method: "post",
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        enteredEmail,
+        enteredPassword,
+        enteredConfirmPassword,
+      }),
       headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${tokenWithWriteAccess}`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ mutations }),
-    })
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      console.log(data);
+    }
+    console.log("data", data);
+
+    if (data.message !== null) {
+      setError(data.message);
+    }
+    if (response.ok) {
+      router.replace("/signin");
+    }
   }
 
   return (
@@ -69,7 +52,10 @@ function Signup(props) {
         <Image src="/image/signup.png" width={480} height={480} />
       </div>
       <section className="ml-auto mr-auto w-4/5 mb-8 md:w-1/3">
-        <form className="flex flex-col md:w-4/5 h-2/3 mt-18 ">
+        <form
+          onSubmit={submitHandler}
+          className="flex flex-col md:w-4/5 h-2/3 mt-18 "
+        >
           {error ? (
             <div className="bg-red-400 text-red-900 border border-red-900 text-center p-4 mb-4">
               {error}
@@ -126,16 +112,5 @@ function Signup(props) {
     </div>
   );
 }
-
-// export const getServerSideProps = async () => {
-//   const query = '*[ _type == "forms"]';
-//   const data = await sanityClient.fetch(query);
-//   console.log("data", data);
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
 
 export default Signup;
