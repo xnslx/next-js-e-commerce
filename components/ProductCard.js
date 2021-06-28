@@ -1,13 +1,29 @@
 import Link from "next/link";
 import { urlFor } from "../utils/sanity";
+import { getSession, signIn, useSession } from "next-auth/client";
 
 function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
+  const [session, loading] = useSession();
+
+  const cartHandler = (e) => {
+    console.log("click");
+    e.preventDefault();
+    if (session) {
+      console.log("you have a session");
+    } else {
+      console.log("you are not in the session");
+    }
+  };
+
   return (
     <Link href={`/products/${slug.current}`}>
       <a className="w-full max-w-sm mx-auto rounded-md shadow-sm overflow-hidden">
         <div className="h-80 w-full justify-end object-contain">
           <img src={urlFor(mainImage)} alt="" />
-          <button className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+          <button
+            onClick={cartHandler}
+            className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+          >
             <svg
               className="h-5 w-5"
               fill="none"

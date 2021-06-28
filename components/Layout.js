@@ -1,12 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import UserIcon from "./ui/user";
+import { getSession, signIn, useSession } from "next-auth/client";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const handleMenu = () => setMenuOpen(!menuOpen);
   const handleOpen = () => setCartOpen(!cartOpen);
+
+  const [session, loading] = useSession();
+  console.log("layout", session);
   return (
     <div className="bg-white">
       <header>
@@ -40,7 +44,9 @@ function Layout({ children }) {
             <div className="flex items-center justify-end w-full">
               <button className="text-gray-600">
                 <UserIcon />
+                {session ? <span>{session.user.email}</span> : null}
               </button>
+
               <button
                 onClick={handleOpen}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
