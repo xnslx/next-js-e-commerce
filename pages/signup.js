@@ -42,7 +42,7 @@ function Signup(props) {
       setError(data.message);
     }
     if (response.ok) {
-      router.replace("/signin");
+      router.replace("/login");
     }
   }
 

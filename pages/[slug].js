@@ -1,49 +1,51 @@
-import Error from 'next/error'
-import { groq } from 'next-sanity'
-import { useRouter } from 'next/router'
-import LandingPage from '../components/LandingPage'
-import { getClient, usePreviewSubscription } from '../utils/sanity'
+import Error from "next/error";
+import { groq } from "next-sanity";
+import { useRouter } from "next/router";
+import LandingPage from "../components/LandingPage";
+import { getClient, usePreviewSubscription } from "../utils/sanity";
 
 const query = groq`*[_type == "route" && slug.current == $slug][0]{
   page->
-}`
+}`;
 
-function ProductPageContainer ({ pageData, preview, slug }) {
-  const router = useRouter()
+function ProductPageContainer({ pageData, preview, slug }) {
+  console.log("pageData", pageData);
+  console.log("preview", preview);
+  const router = useRouter();
   if (!router.isFallback && !pageData) {
-    return <Error statusCode={404} />
+    return <Error statusCode={404} />;
   }
 
-  const { data: { page = {} } = {} } =  usePreviewSubscription(query, {
+  const { data: { page = {} } = {} } = usePreviewSubscription(query, {
     params: { slug },
     initialData: pageData,
-    enabled: preview || router.query.preview !== null
-  })
+    enabled: preview || router.query.preview !== null,
+  });
 
-  return <LandingPage page={page} />
+  return <LandingPage page={page} />;
 }
 
-export async function getStaticProps ({ params = {}, preview = false }) {
-  const { slug } = params
+export async function getStaticProps({ params = {}, preview = false }) {
+  const { slug } = params;
   const { page: pageData } = await getClient(preview).fetch(query, {
-    slug
-  })
+    slug,
+  });
 
   return {
-    props: { preview, pageData, slug }
-  }
+    props: { preview, pageData, slug },
+  };
 }
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
   const routes = await getClient()
     .fetch(`*[_type == "route" && defined(slug.current)]{
     "params": {"slug": slug.current}
-  }`)
+  }`);
 
   return {
     paths: routes || null,
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
-export default ProductPageContainer
+export default ProductPageContainer;
