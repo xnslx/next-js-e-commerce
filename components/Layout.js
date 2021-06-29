@@ -22,30 +22,6 @@ function Layout({ children }) {
               </div>
             </Link>
             <div className="flex items-center justify-end w-full">
-              {!session && (
-                <>
-                  <Link href="/login">
-                    <button className="border font-mono p-2 w-2/3 bg-lime-300 border-black shadow-offset-black mr-2 lg:w-24 lg:mr-8">
-                      Log In
-                    </button>
-                  </Link>
-                  <Link href="/signup">
-                    <button className="border font-mono p-2 w-2/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8">
-                      Sign Up
-                    </button>
-                  </Link>
-                </>
-              )}
-              {session && (
-                <>
-                  <button
-                    className="border font-mono p-2 w-2/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8"
-                    onClick={() => signOut()}
-                  >
-                    Log Out
-                  </button>
-                </>
-              )}
               <button className="text-gray-600">
                 <UserIcon />
                 {session ? <span>{session.user.email}</span> : null}
@@ -87,7 +63,7 @@ function Layout({ children }) {
           <nav
             className={`${
               menuOpen ? "" : "hidden"
-            } sm:flex sm:justify-center sm:items-center mt-4`}
+            } sm:flex sm:justify-center sm:items-center mt-4 `}
           >
             <div className="flex flex-col sm:flex-row">
               <Link href="/">
@@ -105,6 +81,30 @@ function Layout({ children }) {
                   About
                 </a>
               </Link>
+              {!session && (
+                <>
+                  <Link href="/login">
+                    <button className="border font-mono p-2 w-1/3 bg-lime-300 border-black shadow-offset-black mb-2 lg:w-24 lg:mr-8">
+                      Log In
+                    </button>
+                  </Link>
+                  <Link href="/signup">
+                    <button className="border font-mono p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8">
+                      Sign Up
+                    </button>
+                  </Link>
+                </>
+              )}
+              {session && (
+                <>
+                  <button
+                    className="border font-mono p-2 w-2/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8"
+                    onClick={() => signOut()}
+                  >
+                    Log Out
+                  </button>
+                </>
+              )}
             </div>
           </nav>
         </div>

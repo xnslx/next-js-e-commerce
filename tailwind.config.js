@@ -1,4 +1,5 @@
-// const colors = require("tailwindcss/colors");
+const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
     future: {
@@ -8,8 +9,14 @@ module.exports = {
     purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ["Jura", ...defaultTheme.fontFamily.sans],
+            },
             colors: {
                 "accent-1": "#333",
+                lime: colors.lime,
+                "light-blue": colors.lightBlue,
+                cyan: colors.cyan,
             },
             boxShadow: {
                 "offset-lime": "4px 4px lime",

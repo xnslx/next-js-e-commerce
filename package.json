@@ -17,6 +17,7 @@
   "dependencies": {
     "@sanity/client": "^2.0.1",
     "@sanity/image-url": "^0.140.19",
+    "autoprefixer": "^10.2.6",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "mongodb": "^3.6.9",
@@ -24,6 +25,7 @@
     "next": "^10.0.1",
     "next-auth": "^3.27.1",
     "next-sanity": "^0.1.8",
+    "postcss": "^8.3.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -35,7 +37,7 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.1.2",
     "sanity-template": "^2.1.1",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^2.2.4"
   },
   "keywords": [],
   "author": "Sanity.io <hello@sanity.io>",
