@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import UserIcon from "./ui/user";
+import FavoriteIcon from "./ui/favorite";
 import { getSession, signIn, signOut, useSession } from "next-auth/client";
 
 function Layout({ children }) {
@@ -25,6 +26,9 @@ function Layout({ children }) {
               <button className="text-gray-600">
                 <UserIcon />
                 {session ? <span>{session.user.email}</span> : null}
+              </button>
+              <button className="text-gray-600 ml-4">
+                <FavoriteIcon />
               </button>
               {/* shopping cart icon */}
               <button
@@ -82,18 +86,18 @@ function Layout({ children }) {
                 </a>
               </Link>
               {!session && (
-                <>
+                <div className="lg:-mt-2 lg:ml-4">
                   <Link href="/login">
-                    <button className="border font-mono p-2 w-1/3 bg-lime-300 border-black shadow-offset-black mb-2 lg:w-24 lg:mr-8">
+                    <button className="border font-mono p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 lg:mr-8">
                       Log In
                     </button>
                   </Link>
                   <Link href="/signup">
-                    <button className="border font-mono p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8">
+                    <button className="ml-2 border font-mono p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8">
                       Sign Up
                     </button>
                   </Link>
-                </>
+                </div>
               )}
               {session && (
                 <>

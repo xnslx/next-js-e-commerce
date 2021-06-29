@@ -18,6 +18,7 @@
     "@sanity/client": "^2.0.1",
     "@sanity/image-url": "^0.140.19",
     "autoprefixer": "^10.2.6",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "mongodb": "^3.6.9",

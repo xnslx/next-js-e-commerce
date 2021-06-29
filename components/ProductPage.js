@@ -71,7 +71,7 @@ function ProductPage(props) {
             <button className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold">
               Order Now
             </button>
-            <button className="mt-12">
+            <button className="-mt-12">
               <FavoriteIcon />
             </button>
           </div>

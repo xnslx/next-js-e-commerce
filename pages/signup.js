@@ -102,7 +102,7 @@ function Signup(props) {
             <button className="h-10 w-full bg-gray-800 mb-2 mt-8 text-xs text-white rounded mr-1">
               SIGNUP
             </button>
-            <Link href="/signin">
+            <Link href="/login">
               <a className="text-sm font-light">
                 Already have an account? <strong>LOG IN</strong>
               </a>
