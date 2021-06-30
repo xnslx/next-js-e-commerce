@@ -1,9 +1,19 @@
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { urlFor } from "../utils/sanity";
 import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import FavoriteIcon from "../components/ui/favorite";
 import axios from "axios";
+import sanityClient from "@sanity/client";
+
+const config = {
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  useCdn: process.env.NODE_ENV === "production",
+};
+
+const client = sanityClient(config);
 
 function ProductCard({
   _id,
@@ -21,16 +31,40 @@ function ProductCard({
     if (!session) {
       router.push("/login");
     } else {
-      axios
-        .post("http://localhost:3000/api/favoritelist", {
-          prodId: prodId,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // axios
+      //   .post("http://localhost:3000/api/favoritelist", {
+      //     prodId: prodId,
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // const mutations = [
+      //   {
+      //     createOrReplace: {
+      //       _id: "my-list",
+      //       _type: "object",
+      //       title: "Wishing List",
+      //       list: prodId,
+      //     },
+      //   },
+      // ];
+      // fetch(
+      //   `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-30/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+      //   {
+      //     method: "post",
+      //     headers: {
+      //       "Content-type": "application/json",
+      //       Authorization: `Bearer skRl8fcTVkKDM75SmsMSJ1iq5kKaCZARHgIzZiEjWgjEppgjRMhHeCehff28O5wUIo1TXcUU2dZccvhfQ`,
+      //     },
+      //     body: JSON.stringify({ mutations }),
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   .then((result) => console.log(result))
+      //   .catch((error) => console.error(error));
     }
   };
 

@@ -102,7 +102,7 @@ function Layout({ children }) {
               {session && (
                 <>
                   <button
-                    className="border font-mono mt-2 p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8"
+                    className="border font-mono mt-2 p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8 lg:-mt-2 lg:ml-4"
                     onClick={() => signOut()}
                   >
                     Log Out
