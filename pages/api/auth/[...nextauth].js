@@ -26,6 +26,7 @@ const options = {
     Providers.Credentials({
       async authorize(credentials) {
         console.log("credentials", credentials);
+        const client = await connectToDatabase();
         const user = await User.findOne({ email: credentials.email });
         console.log("user", user);
         if (!user) {
