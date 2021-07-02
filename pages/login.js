@@ -26,12 +26,12 @@ function Login(props) {
 
       if (!result.error) {
         router.replace("/");
-        console.log("ok");
+        // console.log("ok");
       }
       if (result.error) {
         setError(result.error);
       }
-      console.log("result", result);
+      // console.log("result", result);
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);

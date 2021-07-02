@@ -18,13 +18,16 @@ const toggleFavoriteList = async (req, res) => {
   const session = await getSession({ req });
   const prodId = req.body.prodId;
   console.log("prodId", prodId);
-
   if (session) {
     try {
+      const client = connectToDatabase();
       const user = await User.findOne({ email: session.user.email });
-      const product = await Products.findById(prodId);
+      console.log("user", user);
+      const product = await Products.findOne({ prodId: prodId });
+      console.log("product", product);
       const favList = user.favoriteList.items;
-      const itemIndex = favList.map((item) => item.productId).indexOf(prodId);
+      const itemIndex = favList.map((item) => item.prodId).indexOf(prodId);
+      console.log(itemIndex);
       if (itemIndex >= 0) {
         user.removeProductFromFavList(product);
         res.status(201).json({

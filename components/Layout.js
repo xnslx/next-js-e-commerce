@@ -11,7 +11,6 @@ function Layout({ children }) {
   const handleOpen = () => setCartOpen(!cartOpen);
 
   const [session, loading] = useSession();
-  console.log("layout", session);
   return (
     <div className="bg-white">
       <header>

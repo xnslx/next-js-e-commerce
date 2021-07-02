@@ -3,8 +3,11 @@ import Providers from "next-auth/providers";
 import { connectToDatabase } from "../../../utils/db";
 import { verifyPassword } from "../../../utils/auth";
 import User from "../../../models/User";
+import jwt from "next-auth/jwt";
 
 require("dotenv").config();
+
+const secret = "veryveryverysecret";
 
 const options = {
   seesion: {
@@ -26,7 +29,7 @@ const options = {
     Providers.Credentials({
       async authorize(credentials) {
         console.log("credentials", credentials);
-        const client = await connectToDatabase();
+        const client = connectToDatabase();
         const user = await User.findOne({ email: credentials.email });
         console.log("user", user);
         if (!user) {

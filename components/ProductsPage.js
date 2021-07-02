@@ -3,7 +3,6 @@ import { useState } from "react";
 import ProductCard from "./ProductCard";
 
 function ProductsPage({ products }) {
-  console.log("products", products);
   return (
     <div className="container mx-auto px-6">
       <h3 className="text-gray-700 text-2xl font-medium">Clothes</h3>

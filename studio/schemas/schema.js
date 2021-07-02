@@ -17,6 +17,7 @@ import route from "./documents/route";
 import siteConfig from "./documents/siteConfig";
 import person from "./documents/person";
 import popup from "./documents/popup";
+import favoriteList from "./documents/favoriteList";
 
 // Object types
 import blockContent from "./objects/blockContent";
@@ -59,6 +60,7 @@ export default createSchema({
         route,
         siteConfig,
         person,
+        favoriteList,
         // When added to this list, object types can be used as
         cta,
         figure,

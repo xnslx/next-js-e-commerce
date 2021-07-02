@@ -36,6 +36,10 @@ const productsSchema = new Schema({
         ref: "User",
         required: true,
     },
+    prodId: {
+        type: String,
+        required: true,
+    },
 });
 
 module.exports =
