@@ -70,7 +70,7 @@ userSchema.methods.removeProductFromFavList = function(product) {
 userSchema.methods.addToShoppingCart = function(product) {
     const newlyAddedToCartItemIndex = this.shoppingCart.items.findIndex(
         (prod) => {
-            return prod.productId.toString() === product._id.toString();
+            return prod.prodId === product.prodId;
         }
     );
     let newQuantity = 1;
@@ -80,7 +80,7 @@ userSchema.methods.addToShoppingCart = function(product) {
             this.shoppingCart.items[newlyAddedToCartItemIndex].quantity + 1;
         updatedCartItems[newlyAddedToCartItemIndex].quantity = newQuantity;
     } else {
-        updatedCartItems.push({ productId: product._id, quantity: newQuantity });
+        updatedCartItems.push({ prodId: product.prodId, quantity: newQuantity });
     }
     const updatedCart = {
         items: updatedCartItems,
@@ -92,7 +92,7 @@ userSchema.methods.addToShoppingCart = function(product) {
 userSchema.methods.removeProductFromShoppingCart = function(product) {
     const needToBeRemovedProductIndex = this.shoppingCart.items.findIndex(
         (prod) => {
-            return prod.productId.toString() === product._id.toString();
+            return prod.prodId === product.prodId;
         }
     );
     const removedProductItem = this.shoppingCart.items.splice(
