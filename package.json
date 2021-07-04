@@ -28,7 +28,11 @@
     "next-sanity": "^0.1.8",
     "postcss": "^8.3.5",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@sanity/cli": "^2.0.9",
