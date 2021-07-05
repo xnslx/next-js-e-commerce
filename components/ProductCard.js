@@ -5,6 +5,8 @@ import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import FavoriteIcon from "../components/ui/favorite";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { toggleFavList } from "../action/action";
 
 function ProductCard({
   _id,
@@ -14,6 +16,7 @@ function ProductCard({
   slug,
   defaultProductVariant,
 }) {
+  const dispatch = useDispatch();
   const [session, loading] = useSession();
   const router = useRouter();
   const [favProduct, setFavProduct] = useState();
@@ -23,16 +26,7 @@ function ProductCard({
     if (!session) {
       router.push("/login");
     } else {
-      axios
-        .post("http://localhost:3000/api/favoritelist", {
-          prodId: prodId,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(toggleFavList(prodId));
     }
   };
 
