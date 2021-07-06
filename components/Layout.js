@@ -4,6 +4,9 @@ import UserIcon from "./ui/user";
 import FavoriteIcon from "./ui/favorite";
 import { getSession, signIn, signOut, useSession } from "next-auth/client";
 import { useSelector } from "react-redux";
+import { logoutUser } from "../action/action";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,11 +14,21 @@ function Layout({ children }) {
   const handleMenu = () => setMenuOpen(!menuOpen);
   const handleOpen = () => setCartOpen(!cartOpen);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+  console.log("router", router);
+
   const [session, loading] = useSession();
   const favoriteListItems = useSelector(
     (state) => state.favoriteList.favoriteList
   );
   console.log("favoriteListItems", favoriteListItems);
+
+  const logoutHandler = () => {
+    signOut();
+    dispatch(logoutUser());
+    router.push("/");
+  };
 
   return (
     <div className="bg-white">
@@ -111,7 +124,7 @@ function Layout({ children }) {
                 <>
                   <button
                     className="border font-mono mt-2 p-2 w-1/3 bg-lime-300 border-black shadow-offset-black lg:w-24 mr-4 lg:mr-8 lg:-mt-2 lg:ml-4"
-                    onClick={() => signOut()}
+                    onClick={logoutHandler}
                   >
                     Log Out
                   </button>

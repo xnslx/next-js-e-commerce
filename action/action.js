@@ -51,3 +51,11 @@ export const clearError = () => {
         type: "CLEAR_ERROR",
     };
 };
+
+export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem("favlist");
+    // localStorage.removeItem("shoppingcart");
+    dispatch({
+        type: "USER_LOGOUT",
+    });
+};

@@ -6,3 +6,5 @@ export const TOGGLE_FAVORITE_LIST = "TOGGLE_FAVORITE_LIST ";
 
 export const GET_ERROR = "GET_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+
+export const USER_LOGOUT = "USER_LOGOUT";

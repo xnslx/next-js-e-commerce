@@ -5,6 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import favoriteListReducer from "./favoritelistReducer";
 import errorReducer from "./errorReducer";
+import authReducer from "./authReducer";
 
 let initialState;
 
@@ -21,6 +22,7 @@ if (typeof window !== "undefined") {
 const rootReducer = combineReducers({
     favoriteList: favoriteListReducer,
     error: errorReducer,
+    auth: authReducer,
 });
 
 const store = createStore(
