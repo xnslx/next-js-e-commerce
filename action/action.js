@@ -37,15 +37,19 @@ import axios from "axios";
 // };
 
 export const toggleFavList = (productId) => (dispatch, getState) => {
+    console.log("getState", getState());
     axios
-        .post("http://localhost:3000/api/favoritelist", { prodId: productId })
+        .post("/api/favoritelist", { prodId: productId })
         .then((result) => {
-            console.log("toggle", result);
-            // dispatch({ type: "ADD_PRODUCT_FAVORITE_LIST", payload: productId });
-            // localStorage.setItem(
-            //     "favlist",
-            //     JSON.stringify(getState().favoriteList.favoriteList)
-            // );
+            console.log("result", result);
+            dispatch({
+                type: "TOGGLE_FAVORITE_LIST",
+                payload: result.data.favList.map((i) => i.prodId),
+            });
+            localStorage.setItem(
+                "favlist",
+                JSON.stringify(getState().favoriteList.favoriteList)
+            );
         })
         .catch((err) => {
             dispatch({
