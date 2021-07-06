@@ -17,28 +17,25 @@ export default async (req, res) => {
 const toggleFavoriteList = async (req, res) => {
   const session = await getSession({ req });
   const prodId = req.body.prodId;
-  console.log("prodId", prodId);
   if (session) {
     try {
       const client = connectToDatabase();
       const user = await User.findOne({ email: session.user.email });
-      console.log("user", user);
       const product = await Products.findOne({ prodId: prodId });
-      console.log("product", product);
       const favList = user.favoriteList.items;
       const itemIndex = favList.map((item) => item.prodId).indexOf(prodId);
-      console.log(itemIndex);
       if (itemIndex >= 0) {
-        user.removeProductFromFavList(product);
+        const result = await user.removeProductFromFavList(product);
         res.status(201).json({
           message: "Remove product from favorite list",
-          favList: favList,
+          favList: result.favoriteList.items,
         });
       } else if (itemIndex < 0) {
-        user.addToFavoritesList(product);
-        res
-          .status(201)
-          .json({ message: "Add product to favorite list", favList: favList });
+        const result = await user.addToFavoritesList(product);
+        res.status(201).json({
+          message: "Add product to favorite list",
+          favList: result.favoriteList.items,
+        });
       }
     } catch (err) {
       console.log(err);
