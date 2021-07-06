@@ -1,5 +1,4 @@
 import * as actionTypes from "../action/type";
-import favoriteList from "../studio/schemas/documents/favoriteList";
 
 const initialState = {
     favoriteList: [],
@@ -8,16 +7,6 @@ const initialState = {
 const favoriteListReducer = (state = initialState, action) => {
     console.log("action", action);
     switch (action.type) {
-        // case actionTypes.ADD_PRODUCT_FAVORITE_LIST:
-        //     return {
-        //         ...state,
-        //         favoriteList: [...state.favoriteList, action.payload],
-        //     };
-        // case actionTypes.REMOVE_PRODUCT_FAVORITE_LIST:
-        //     return {
-        //         ...state,
-        //         favoriteList: state.favoriteList.filter((id) => id !== action.payload),
-        //     };
         case actionTypes.TOGGLE_FAVORITE_LIST:
             return {
                 ...state,

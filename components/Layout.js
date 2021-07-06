@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import UserIcon from "./ui/user";
 import FavoriteIcon from "./ui/favorite";
 import { getSession, signIn, signOut, useSession } from "next-auth/client";
+import { useSelector } from "react-redux";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,6 +12,11 @@ function Layout({ children }) {
   const handleOpen = () => setCartOpen(!cartOpen);
 
   const [session, loading] = useSession();
+  const favoriteListItems = useSelector(
+    (state) => state.favoriteList.favoriteList
+  );
+  console.log("favoriteListItems", favoriteListItems);
+
   return (
     <div className="bg-white">
       <header>
@@ -28,6 +34,9 @@ function Layout({ children }) {
               </button>
               <button className="text-gray-600 ml-4">
                 <FavoriteIcon />
+                <span>
+                  {favoriteListItems.length > 0 ? favoriteListItems.length : ""}
+                </span>
               </button>
               {/* shopping cart icon */}
               <button

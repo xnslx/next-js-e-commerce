@@ -3,12 +3,17 @@ import { useState, useRef, useEffect } from "react";
 import { getProviders, useSession, getSession, signIn } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getProductFavList } from "../action/action";
+import { useDispatch } from "react-redux";
 
 function Login(props) {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const [session, loading] = useSession();
+  console.log(session);
 
   const router = useRouter();
 
@@ -23,6 +28,7 @@ function Login(props) {
         email: enteredEmail,
         password: enteredPassword,
       });
+      dispatch(getProductFavList());
 
       if (!result.error) {
         router.replace("/");
