@@ -1,12 +1,30 @@
 import { useState } from "react";
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import FavoriteIcon from "./ui/favorite";
+import { useDispatch } from "react-redux";
+import { toggleFavList } from "../action/action";
+import { getSession, signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 function ProductPage(props) {
+  const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const handleCount = (value) =>
     !(count === 0 && value === -1) ? setCount(count + value) : count;
-  const { title, defaultProductVariant, mainImage, body } = props;
+  const { id, title, defaultProductVariant, mainImage, body } = props;
+  console.log(id);
+
+  const [session, loading] = useSession();
+  const router = useRouter();
+
+  const toggleFavListHandler = (e, prodId) => {
+    console.log("prodId", prodId);
+    if (!session) {
+      router.push("/login");
+    } else {
+      dispatch(toggleFavList(prodId));
+    }
+  };
   return (
     <div className="container mx-auto px-6">
       <div className="md:flex md:items-center">
@@ -22,8 +40,10 @@ function ProductPage(props) {
           />
         </div>
         <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-          <h3 className="text-gray-700 uppercase text-lg">{title}</h3>
-          <span className="text-gray-500 mt-3">
+          <h3 className="text-2xl leading-7 mb-2 font-bold uppercase">
+            {title}
+          </h3>
+          <span className="text-2xl leading-7 font-bold mt-3">
             ${defaultProductVariant?.price}
           </span>
           <hr className="my-3" />
@@ -71,7 +91,10 @@ function ProductPage(props) {
             <button className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold">
               Order Now
             </button>
-            <button className="-mt-12">
+            <button
+              className="-mt-8"
+              onClick={(e) => toggleFavListHandler(e, id)}
+            >
               <FavoriteIcon />
             </button>
           </div>

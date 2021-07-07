@@ -1,7 +1,11 @@
+import React, { useEffect } from "react";
 import { combineReducers } from "redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import favoriteListReducer from "./favoritelistReducer";
 import errorReducer from "./errorReducer";
@@ -12,8 +16,8 @@ let initialState;
 if (typeof window !== "undefined") {
     initialState = {
         favoriteList: {
-            favoriteList: localStorage.getItem("favlist") ?
-                JSON.parse(localStorage.getItem("favlist")) :
+            favoriteList: window.localStorage.getItem("favlist") ?
+                JSON.parse(window.localStorage.getItem("favlist")) :
                 [],
         },
     };

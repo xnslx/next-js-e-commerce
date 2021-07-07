@@ -28,16 +28,13 @@ function Login(props) {
         email: enteredEmail,
         password: enteredPassword,
       });
-      dispatch(getProductFavList());
 
       if (!result.error) {
         router.replace("/");
-        // console.log("ok");
       }
       if (result.error) {
         setError(result.error);
       }
-      // console.log("result", result);
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
@@ -128,7 +125,6 @@ function Login(props) {
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
-  console.log("providers", providers);
   return {
     props: {
       providers,

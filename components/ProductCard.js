@@ -22,7 +22,6 @@ function ProductCard({
   const [favProduct, setFavProduct] = useState();
 
   const toggleFavHandler = (e, prodId) => {
-    console.log(prodId);
     if (!session) {
       router.push("/login");
     } else {

@@ -12,6 +12,7 @@ const favoriteListReducer = (state = initialState, action) => {
                 ...state,
                 favoriteList: action.payload,
             };
+            console.log(favoriteList);
         case actionTypes.GET_PRODUCT_FAVORITE_LIST:
             return {...state, favoriteList: action.payload };
         case actionTypes.EMPTY_PRODUCT_FAVORITE_LIST:
