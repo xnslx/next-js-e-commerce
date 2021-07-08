@@ -13,7 +13,6 @@ function Login(props) {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const [session, loading] = useSession();
-  console.log(session);
 
   const router = useRouter();
 

@@ -7,6 +7,7 @@ import FavoriteIcon from "../components/ui/favorite";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
+import { TOGGLE_FAVORITE_LIST } from "../action/type";
 
 function ProductCard({
   _id,

@@ -21,21 +21,12 @@ function Layout({ children }) {
 
   const [session, loading] = useSession();
 
-  const favoriteListItems = useSelector(
-    (state) => state.favoriteList.favoriteList
-  );
-  console.log("favoriteListItems", favoriteListItems);
+  const store = useStore();
+  console.log(store.getState().favoriteList.favoriteList.length);
 
-  // if (session) {
-  //   dispatch(getProductFavList());
-  // }
   useEffect(() => {
-    try {
-      dispatch(getProductFavList());
-    } catch (err) {
-      console.log(err);
-    }
-  }, [session]);
+    store.getState().favoriteList.favoriteList.length;
+  }, []);
 
   const logoutHandler = () => {
     signOut();
@@ -53,16 +44,14 @@ function Layout({ children }) {
                 Pulp Inc.
               </div>
             </Link>
-            <div className="flex items-center justify-end w-full">
+            <div className="flex items-center justify-end w-full lg:w-1/5 lg:justify-around">
               <button className="text-gray-600">
                 <UserIcon />
                 {session ? <span>{session.user.email}</span> : null}
               </button>
-              <button className="text-gray-600 ml-4">
+              <button className="text-gray-600 ml-4 lg:ml-0">
                 <FavoriteIcon />
-                {/* <span>
-                  {favoriteListItems.length > 0 ? favoriteListItems.length : ""}
-                </span> */}
+                <span>{store.getState().favoriteList.favoriteList.length}</span>
               </button>
               {/* shopping cart icon */}
               <button

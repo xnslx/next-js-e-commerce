@@ -7,7 +7,7 @@ export const toggleFavList = (productId) => (dispatch, getState) => {
         .then((result) => {
             console.log("result", result);
             dispatch({
-                type: "TOGGLE_FAVORITE_LIST",
+                type: "ADD_FAVORITE_LIST",
                 payload: result.data.favList.map((i) => i.prodId),
             });
             localStorage.setItem("favlist", JSON.stringify(result.data.favList));

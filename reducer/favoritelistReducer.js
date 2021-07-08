@@ -5,14 +5,12 @@ const initialState = {
 };
 
 const favoriteListReducer = (state = initialState, action) => {
-    console.log("action", action);
     switch (action.type) {
-        case actionTypes.TOGGLE_FAVORITE_LIST:
+        case actionTypes.ADD_FAVORITE_LIST:
             return {
                 ...state,
                 favoriteList: action.payload,
             };
-            console.log(favoriteList);
         case actionTypes.GET_PRODUCT_FAVORITE_LIST:
             return {...state, favoriteList: action.payload };
         case actionTypes.EMPTY_PRODUCT_FAVORITE_LIST:
