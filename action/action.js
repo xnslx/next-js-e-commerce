@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const toggleFavList = (productId) => (dispatch, getState) => {
-    console.log("getState", getState());
     axios
         .post("/api/favoritelist", { prodId: productId })
         .then((result) => {
@@ -10,7 +9,7 @@ export const toggleFavList = (productId) => (dispatch, getState) => {
                 type: "ADD_FAVORITE_LIST",
                 payload: result.data.favList.map((i) => i.prodId),
             });
-            localStorage.setItem("favlist", JSON.stringify(result.data.favList));
+            // localStorage.setItem("favlist", JSON.stringify(result.data.favList));
         })
         .catch((err) => {
             dispatch({
@@ -29,7 +28,7 @@ export const getProductFavList = () => (dispatch) => {
                 type: "GET_PRODUCT_FAVORITE_LIST",
                 payload: result.data.favoriteList,
             });
-            localStorage.setItem("favlist", JSON.stringify(result.data.favoriteList));
+            // localStorage.setItem("favlist", JSON.stringify(result.data.favoriteList));
         })
         .catch((err) => {
             dispatch({

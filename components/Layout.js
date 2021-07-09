@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { logoutUser } from "../action/action";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { useStore } from "react-redux";
 import { getProductFavList } from "../action/action";
 
 function Layout({ children }) {
@@ -18,15 +17,9 @@ function Layout({ children }) {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const favList = useSelector((state) => state.favoriteList.favoriteList);
 
   const [session, loading] = useSession();
-
-  const store = useStore();
-  console.log(store.getState().favoriteList.favoriteList.length);
-
-  useEffect(() => {
-    store.getState().favoriteList.favoriteList.length;
-  }, []);
 
   const logoutHandler = () => {
     signOut();
@@ -51,7 +44,7 @@ function Layout({ children }) {
               </button>
               <button className="text-gray-600 ml-4 lg:ml-0">
                 <FavoriteIcon />
-                <span>{store.getState().favoriteList.favoriteList.length}</span>
+                <span>{session ? favList.length : ""}</span>
               </button>
               {/* shopping cart icon */}
               <button

@@ -1,10 +1,7 @@
 import * as actionTypes from "../action/type";
+import { intlState } from "./index";
 
-const initialState = {
-    favoriteList: [],
-};
-
-const favoriteListReducer = (state = initialState, action) => {
+const favoriteListReducer = (state = intlState, action) => {
     switch (action.type) {
         case actionTypes.ADD_FAVORITE_LIST:
             return {
