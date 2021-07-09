@@ -11,21 +11,24 @@ import logger from "redux-logger";
 import favoriteListReducer from "./favoritelistReducer";
 import errorReducer from "./errorReducer";
 import authReducer from "./authReducer";
+import shoppingCartReducer from "./shoppingCartReducer";
 
 let store;
 
 export const intlState = {
   favoriteList: [],
+  shoppingCart: [],
 };
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["favoriteList"],
+  whitelist: ["favoriteList", "shoppingCart"],
 };
 
 const rootReducer = combineReducers({
   favoriteList: favoriteListReducer,
+  shoppingCart: shoppingCartReducer,
   error: errorReducer,
   auth: authReducer,
 });

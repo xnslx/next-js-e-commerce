@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
 import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { toggleShoppingCart } from "../action/action";
 
 function ProductPage(props) {
   const dispatch = useDispatch();
@@ -23,6 +24,15 @@ function ProductPage(props) {
       router.push("/login");
     } else {
       dispatch(toggleFavList(prodId));
+    }
+  };
+
+  const toggleShoppingCartHandler = (e, prodId) => {
+    console.log("prodId", prodId);
+    if (!session) {
+      router.push("/login");
+    } else {
+      dispatch(toggleShoppingCart(prodId));
     }
   };
   return (
@@ -57,7 +67,7 @@ function ProductPage(props) {
                 className="text-gray-500 focus:outline-none focus:text-gray-600"
               >
                 <svg
-                  className="h-5 w-5"
+                  className="h-6 w-6"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -74,7 +84,7 @@ function ProductPage(props) {
                 className="text-gray-500 focus:outline-none focus:text-gray-600"
               >
                 <svg
-                  className="h-5 w-5"
+                  className="h-6 w-6"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -88,8 +98,11 @@ function ProductPage(props) {
             </div>
           </div>
           <div className="mt-12 flex flex-row justify-between ">
-            <button className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold">
-              Order Now
+            <button
+              className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
+              onClick={(e) => toggleShoppingCartHandler(e, id)}
+            >
+              Add to Shopping Cart
             </button>
             <button
               className="-mt-8"
