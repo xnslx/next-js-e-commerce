@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import FavoriteIcon from "./ui/favorite";
 import { useDispatch } from "react-redux";
@@ -12,8 +12,8 @@ function ProductPage(props) {
   const [count, setCount] = useState(1);
   const handleCount = (value) =>
     !(count === 0 && value === -1) ? setCount(count + value) : count;
+
   const { id, title, defaultProductVariant, mainImage, body } = props;
-  console.log(id);
 
   const [session, loading] = useSession();
   const router = useRouter();
@@ -28,11 +28,12 @@ function ProductPage(props) {
   };
 
   const toggleShoppingCartHandler = (e, prodId) => {
+    console.log(count);
     console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {
-      dispatch(toggleShoppingCart(prodId));
+      dispatch(toggleShoppingCart(prodId, count));
     }
   };
   return (

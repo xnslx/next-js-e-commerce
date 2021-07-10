@@ -68,6 +68,7 @@ userSchema.methods.removeProductFromFavList = function(product) {
 };
 
 userSchema.methods.addToShoppingCart = function(product) {
+    console.log("addToShoppingCart", product);
     const newlyAddedToCartItemIndex = this.shoppingCart.items.findIndex(
         (prod) => {
             return prod.prodId === product.prodId;

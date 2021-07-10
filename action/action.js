@@ -57,9 +57,15 @@ export const logoutUser = () => (dispatch) => {
     });
 };
 
-export const toggleShoppingCart = (productId) => (dispatch, getState) => {
+export const toggleShoppingCart = (productId, count) => (
+    dispatch,
+    getState
+) => {
     axios
-        .post("http://localhost:3000/api/shoppingcart", { prodId: productId })
+        .post("http://localhost:3000/api/shoppingcart", {
+            prodId: productId,
+            quantity: count,
+        })
         .then((result) => {
             console.log("result", result);
             dispatch({

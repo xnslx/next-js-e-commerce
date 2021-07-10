@@ -17,6 +17,8 @@ export default async (req, res) => {
 const toggleShoppingCart = async (req, res) => {
   const session = await getSession({ req });
   const prodId = req.body.prodId;
+  const total = req.body.quantity;
+  console.log("total", total);
   if (session) {
     try {
       const client = connectToDatabase();
