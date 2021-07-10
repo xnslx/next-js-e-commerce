@@ -19,6 +19,8 @@ function ProductPage(props) {
   const [session, loading] = useSession();
   const router = useRouter();
 
+  const countRef = useRef();
+
   const shoppingCartList = useSelector(
     (state) => state.shoppingCart.shoppingCart
   );
@@ -33,17 +35,19 @@ function ProductPage(props) {
   };
 
   const addToCartHandler = (e, prodId, count) => {
-    console.log(count);
+    const enteredCount = countRef.current.value;
+    console.log("count", count);
+    console.log("enteredCount", enteredCount);
     console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {
       dispatch(addShoppingCart(prodId, count));
-      console.log("hello");
     }
   };
 
   const removeFromCartHandler = (e, prodId, count) => {
+    const enteredCount = countRef.current.value;
     console.log(count);
     console.log("prodId", prodId);
     if (!session) {
@@ -97,7 +101,9 @@ function ProductPage(props) {
                   <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </button>
-              <span className="text-gray-700 text-lg mx-2">{count}</span>
+              <span className="text-gray-700 text-lg mx-2" ref={countRef}>
+                {count}
+              </span>
               <button
                 onClick={() => handleCount(-1)}
                 className="text-gray-500 focus:outline-none focus:text-gray-600"
@@ -126,14 +132,14 @@ function ProductPage(props) {
             {shoppingCartList.includes(id) ? (
               <button
                 className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
-                onClick={(e) => removeFromCartHandler(e, id)}
+                onClick={(e) => removeFromCartHandler(e, id, count)}
               >
                 Remove product from shopping cart
               </button>
             ) : (
               <button
                 className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
-                onClick={(e) => addToCartHandler(e, id)}
+                onClick={(e) => addToCartHandler(e, id, count)}
               >
                 Add to cart
               </button>

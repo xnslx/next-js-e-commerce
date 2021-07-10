@@ -67,8 +67,11 @@ userSchema.methods.removeProductFromFavList = function(product) {
     return this.save();
 };
 
-userSchema.methods.addToShoppingCart = function(product) {
+userSchema.methods.addToShoppingCart = function(product, total) {
     console.log("addToShoppingCart", product);
+    console.log("addToShoppingCart", total);
+    console.log("this.shoppingCart", this.shoppingCart);
+    const newlyUpdatedQuantity = total;
     const newlyAddedToCartItemIndex = this.shoppingCart.items.findIndex(
         (prod) => {
             return prod.prodId === product.prodId;
@@ -78,8 +81,11 @@ userSchema.methods.addToShoppingCart = function(product) {
     const updatedCartItems = [...this.shoppingCart.items];
     if (newlyAddedToCartItemIndex >= 0) {
         newQuantity =
-            this.shoppingCart.items[newlyAddedToCartItemIndex].quantity + 1;
-        updatedCartItems[newlyAddedToCartItemIndex].quantity = newQuantity;
+            this.shoppingCart.items[newlyAddedToCartItemIndex].newlyUpdatedQuantity +
+            1;
+        updatedCartItems[
+            newlyAddedToCartItemIndex
+        ].newlyUpdatedQuantity = newQuantity;
     } else {
         updatedCartItems.push({ prodId: product.prodId, quantity: newQuantity });
     }

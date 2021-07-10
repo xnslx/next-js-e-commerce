@@ -33,7 +33,8 @@ const addToShoppingCart = async(req, res) => {
             if (itemIndex >= 0) {
                 return;
             } else if (itemIndex < 0) {
-                const result = await user.addToShoppingCart(product);
+                const result = await user.addToShoppingCart(product, total);
+                console.log("result", result);
                 res.status(201).json({
                     message: "Add product to shopping cart",
                     shoppingCart: result.shoppingCart.items,

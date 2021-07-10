@@ -58,6 +58,7 @@ export const logoutUser = () => (dispatch) => {
 };
 
 export const addShoppingCart = (productId, count) => (dispatch, getState) => {
+    console.log("action.js", count);
     axios
         .post("http://localhost:3000/api/shoppingcart/addtoshoppingcart", {
             prodId: productId,

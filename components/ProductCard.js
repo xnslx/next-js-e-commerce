@@ -36,11 +36,11 @@ function ProductCard({
         <a href={`/products/${slug.current}`}>
           <img src={urlFor(mainImage)} alt="" />
         </a>
-        <button onClick={(e) => toggleFavHandler(e, _id)} className="">
+        <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2">
           <FavoriteIcon />
         </button>
       </div>
-      <div className="mb-4 lg:mt-48">
+      <div className="mb-4 lg:mt-48 mt-4">
         <h3 className="text-lg font-bold uppercase">{title}</h3>
         <div className="flex flex-col">
           <span className="text-lg leading-7">
