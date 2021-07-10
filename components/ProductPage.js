@@ -3,9 +3,10 @@ import { urlFor, PortableText, getClient } from "../utils/sanity";
 import FavoriteIcon from "./ui/favorite";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
+import { addShoppingCart, removeShoppingCart } from "../action/action";
 import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { toggleShoppingCart } from "../action/action";
+import { useSelector } from "react-redux";
 
 function ProductPage(props) {
   const dispatch = useDispatch();
@@ -18,6 +19,10 @@ function ProductPage(props) {
   const [session, loading] = useSession();
   const router = useRouter();
 
+  const shoppingCartList = useSelector(
+    (state) => state.shoppingCart.shoppingCart
+  );
+
   const toggleFavListHandler = (e, prodId) => {
     console.log("prodId", prodId);
     if (!session) {
@@ -27,15 +32,28 @@ function ProductPage(props) {
     }
   };
 
-  const toggleShoppingCartHandler = (e, prodId) => {
+  const addToCartHandler = (e, prodId, count) => {
     console.log(count);
     console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {
-      dispatch(toggleShoppingCart(prodId, count));
+      dispatch(addShoppingCart(prodId, count));
+      console.log("hello");
     }
   };
+
+  const removeFromCartHandler = (e, prodId, count) => {
+    console.log(count);
+    console.log("prodId", prodId);
+    if (!session) {
+      router.push("/login");
+    } else {
+      dispatch(removeShoppingCart(prodId, count));
+      console.log("hello");
+    }
+  };
+
   return (
     <div className="container mx-auto px-6">
       <div className="md:flex md:items-center">
@@ -99,12 +117,27 @@ function ProductPage(props) {
             </div>
           </div>
           <div className="mt-12 flex flex-row justify-between ">
-            <button
+            {/* <button
               className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
               onClick={(e) => toggleShoppingCartHandler(e, id)}
             >
               Add to Shopping Cart
-            </button>
+            </button> */}
+            {shoppingCartList.includes(id) ? (
+              <button
+                className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
+                onClick={(e) => removeFromCartHandler(e, id)}
+              >
+                Remove product from shopping cart
+              </button>
+            ) : (
+              <button
+                className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
+                onClick={(e) => addToCartHandler(e, id)}
+              >
+                Add to cart
+              </button>
+            )}
             <button
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}

@@ -57,12 +57,9 @@ export const logoutUser = () => (dispatch) => {
     });
 };
 
-export const toggleShoppingCart = (productId, count) => (
-    dispatch,
-    getState
-) => {
+export const addShoppingCart = (productId, count) => (dispatch, getState) => {
     axios
-        .post("http://localhost:3000/api/shoppingcart", {
+        .post("http://localhost:3000/api/shoppingcart/addtoshoppingcart", {
             prodId: productId,
             quantity: count,
         })
@@ -70,7 +67,31 @@ export const toggleShoppingCart = (productId, count) => (
             console.log("result", result);
             dispatch({
                 type: "ADD_SHOPPING_CART",
-                payload: result.data.shoppingCart.map((i) => i.prodId),
+                payload: productId,
+            });
+        })
+        .catch((err) => {
+            dispatch({
+                type: "GET_ERROR",
+                payload: err.response.data,
+            });
+        });
+};
+
+export const removeShoppingCart = (productId, count) => (
+    dispatch,
+    getState
+) => {
+    axios
+        .post("http://localhost:3000/api/shoppingcart/removefromshoppingcart", {
+            prodId: productId,
+            quantity: count,
+        })
+        .then((result) => {
+            console.log("result", result);
+            dispatch({
+                type: "REMOVE_SHOPPING_CART",
+                payload: productId,
             });
         })
         .catch((err) => {
