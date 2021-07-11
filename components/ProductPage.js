@@ -54,7 +54,14 @@ function ProductPage(props) {
       router.push("/login");
     } else {
       dispatch(removeShoppingCart(prodId, count));
-      console.log("hello");
+    }
+  };
+
+  const toggleShoppingCartHandler = (e, prodId) => {
+    if (!session) {
+      router.push("/login");
+    } else {
+      dispatch(addShoppingCart(prodId, count));
     }
   };
 
@@ -123,13 +130,13 @@ function ProductPage(props) {
             </div>
           </div>
           <div className="mt-12 flex flex-row justify-between ">
-            {/* <button
+            <button
               className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
               onClick={(e) => toggleShoppingCartHandler(e, id)}
             >
               Add to Shopping Cart
-            </button> */}
-            {shoppingCartList.includes(id) ? (
+            </button>
+            {/* {shoppingCartList.includes(id) ? (
               <button
                 className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
                 onClick={(e) => removeFromCartHandler(e, id, count)}
@@ -143,7 +150,7 @@ function ProductPage(props) {
               >
                 Add to cart
               </button>
-            )}
+            )} */}
             <button
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}

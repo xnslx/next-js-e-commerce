@@ -5,12 +5,16 @@ const shoppingCartReducer = (state = intlState, action) => {
     console.log("action", action);
     switch (action.type) {
         case actionTypes.ADD_SHOPPING_CART:
-            if (state.shoppingCart.includes(action.payload)) {
-                return {...state, shoppingCart: state.shoppingCart };
-            } else {
-                const updatedItem = state.shoppingCart.concat(action.payload);
-                return {...state, shoppingCart: updatedItem };
-            }
+            // if (state.shoppingCart.includes(action.payload)) {
+            //     return {...state, shoppingCart: state.shoppingCart };
+            // } else {
+            //     const updatedItem = state.shoppingCart.concat(action.payload);
+            //     return {...state, shoppingCart: updatedItem };
+            // }
+            return {
+                ...state,
+                shoppingCart: action.payload,
+            };
         case actionTypes.REMOVE_SHOPPING_CART:
             return {
                 ...state,
