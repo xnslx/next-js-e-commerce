@@ -42,19 +42,19 @@ const toggleShoppingCart = async(req, res) => {
                 });
                 console.log("targetItem", targetItem);
                 targetItem.quantity = total;
-                const list = shoppingcart.splice(
-                    checkNewlyAddedItemIndex,
-                    1,
-                    targetItem
-                );
-                console.log("list", list);
-                shoppingcart[checkNewlyAddedItemIndex] = list;
+                // const list = shoppingcart.splice(
+                //     checkNewlyAddedItemIndex,
+                //     1,
+                //     targetItem
+                // );
+                // console.log("list", list);
+                // shoppingcart[checkNewlyAddedItemIndex] = list;
                 user.shoppingCart = shoppingcart;
                 console.log("shoppingcart", shoppingcart);
                 user.save();
                 res.status(201).json({
                     message: "Add product to shopping cart",
-                    shoppingCart: user.shoppingCart.items,
+                    shoppingCart: shoppingcart,
                 });
             } else if (checkNewlyAddedItemIndex < 0) {
                 // no item found in the shopping cart, add item with quantity to the shopping cart
