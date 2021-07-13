@@ -105,7 +105,7 @@ export const removeShoppingCart = (productId, count) => (
 
 export const getShoppingCart = () => (dispatch) => {
     axios
-        .get("http://localhost:3000/api/shoppingcart")
+        .get("http://localhost:3000/api/shoppingcart/addtoshoppingcart")
         .then((result) => {
             console.log("result", result);
             dispatch({

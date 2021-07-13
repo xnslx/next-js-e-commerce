@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { logoutUser } from "../action/action";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { getProductFavList } from "../action/action";
+import { getProductFavList, getShoppingCart } from "../action/action";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,6 +31,13 @@ function Layout({ children }) {
     router.push("/");
   };
 
+  const getShoppingCartHandler = () => {
+    if (!session) {
+      router.push("/login");
+    } else {
+      dispatch(getShoppingCart());
+    }
+  };
   return (
     <div className="bg-white">
       <header>
@@ -48,15 +55,15 @@ function Layout({ children }) {
               </button>
               <button className="text-gray-600 ml-4 lg:ml-0">
                 <FavoriteIcon />
-                {/* <span>{session ? favList.length : ""}</span> */}
+                <span>{session ? favList.length : ""}</span>
               </button>
               {/* shopping cart icon */}
               <button
-                onClick={handleOpen}
+                onClick={getShoppingCartHandler}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
                 <ShoppingCartIcon />
-                {/* <span>{session ? shoppingCartList.length : ""}</span> */}
+                <span>{session ? shoppingCartList.length : ""}</span>
               </button>
               <div className="flex sm:hidden">
                 <button
