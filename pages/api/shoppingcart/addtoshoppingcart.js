@@ -130,20 +130,40 @@ const getShoppingCart = async (req, res) => {
       console.log("getShoppingCart", user);
       const shoppingcart = user.shoppingCart.items;
       console.log("shoppingcart", shoppingcart);
-      const detailedproducts = await user
-        .populate("shoppingCart.items")
-        .execPopulate();
-      console.log(detailedproducts);
-      //   const detailedproducts = await User.aggregate([
-      //     {
-      //       $match: { "user.shoppingCart.items.prodId": Products.prodId },
-      //     },
-      //   ]);
-      console.log("detailedproducts", detailedproducts);
-      console.log("result", result);
-      res
-        .status(200)
-        .json({ shoppingCart: detailedproducts.shoppingCart.items });
+      //   const detailedproducts = await user
+      //     .populate("shoppingCart.items.prodId")
+      //     .execPopulate();
+      //     console.log(detailedproducts);
+
+      const detailedproducts = await User.aggregate([
+        {
+          $lookup: {
+            from: "products",
+            let: {
+              shoppingCart: "$shoppingCart.items.prodId",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      {
+                        $in: ["$prodId", "$$shoppingCart"],
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+            as: "userShoppingCartItems",
+          },
+        },
+      ]);
+      console.log(
+        "detailedproducts",
+        detailedproducts[0].userShoppingCartItems
+      );
+      res.status(200).json({ shoppingCart: detailedproducts });
     } catch (err) {
       console.log(err);
     }
