@@ -55,7 +55,7 @@ function Layout({ children }) {
               </button>
               <button className="text-gray-600 ml-4 lg:ml-0">
                 <FavoriteIcon />
-                <span>{session ? favList.length : ""}</span>
+                {session ? <span>{favList.length}</span> : ""}
               </button>
               {/* shopping cart icon */}
               <button
@@ -63,7 +63,7 @@ function Layout({ children }) {
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
                 <ShoppingCartIcon />
-                <span>{session ? shoppingCartList.length : ""}</span>
+                {session ? <span>{shoppingCartList.length}</span> : ""}
               </button>
               <div className="flex sm:hidden">
                 <button
