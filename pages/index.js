@@ -1,13 +1,36 @@
+import { useState } from "react";
 import Error from "next/error";
 import { useRouter } from "next/router";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import ProductsPage from "../components/ProductsPage";
+
+import PopOver from "../components/ui/popover";
+import SortFilter from "../components/sortandfilter/sortfilter";
+
+import SearchResult from "../components/searchresult";
 
 const query = `//groq
   *[_type == "product" && defined(slug.current)]
 `;
 
 function IndexPage(props) {
+  const [open, setOpen] = useState(false);
+  const [listProducts, setListProducts] = useState(products);
+  const [haveResult, setHaveResult] = useState(false);
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setOpen((prevState) => ({
+      open: !prevState.open,
+    }));
+  };
+
+  const callbackHandler = (result) => {
+    console.log("indexjs", result);
+    setListProducts(result);
+    setHaveResult(true);
+  };
+
   const { productsData, preview } = props;
   const router = useRouter();
 
@@ -21,8 +44,16 @@ function IndexPage(props) {
 
   return (
     <div className="my-8">
+      {open ? <PopOver parentCallback={callbackHandler} /> : null}
+      <a onClick={clickHandler}>
+        <SortFilter />
+      </a>
       <div className="mt-4">
-        <ProductsPage products={products} />
+        {haveResult ? (
+          <SearchResult items={listProducts} />
+        ) : (
+          <ProductsPage products={products} />
+        )}
       </div>
     </div>
   );

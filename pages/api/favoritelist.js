@@ -51,13 +51,38 @@ const getFavoriteList = async (req, res) => {
   if (session) {
     try {
       const user = await User.findOne({ email: session.user.email });
-      const favList = user.favoriteList.items;
-      const detailedproducts = await user
-        .populate("favoriteList.items.productId")
-        .execPopulate();
-      res
-        .status(200)
-        .json({ favoriteList: detailedproducts.favoriteList.items });
+      const favoriteList = user.favoriteList.items;
+
+      const detailedproducts = await User.aggregate([
+        {
+          $lookup: {
+            from: "products",
+            let: {
+              favoriteList: "$favoriteList.items.prodId",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      {
+                        $in: ["$prodId", "$$favoriteList"],
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+            as: "userFavoriteListItems",
+          },
+        },
+      ]);
+      const targetUser = await detailedproducts.find((i) => {
+        if (i.email === session.user.email) {
+          return i;
+        }
+      });
+      res.status(200).json({ favoriteList: targetUser.userFavoriteListItems });
     } catch (err) {
       console.log(err);
     }

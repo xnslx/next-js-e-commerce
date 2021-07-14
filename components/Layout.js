@@ -38,6 +38,15 @@ function Layout({ children }) {
       dispatch(getShoppingCart());
     }
   };
+
+  const getFavoriteListHandler = () => {
+    if (!session) {
+      router.push("/login");
+    } else {
+      dispatch(getProductFavList());
+    }
+  };
+
   return (
     <div className="bg-white">
       <header>
@@ -53,7 +62,10 @@ function Layout({ children }) {
                 <UserIcon />
                 {session ? <span>{session.user.email}</span> : null}
               </button>
-              <button className="text-gray-600 ml-4 lg:ml-0">
+              <button
+                className="text-gray-600 ml-4 lg:ml-0"
+                onClick={getFavoriteListHandler}
+              >
                 <FavoriteIcon />
                 {session ? <span>{favList.length}</span> : ""}
               </button>

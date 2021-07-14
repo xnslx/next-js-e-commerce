@@ -2,7 +2,7 @@ import * as actionTypes from "../action/type";
 import { intlState } from "./index";
 
 const shoppingCartReducer = (state = intlState, action) => {
-    console.log("action", action);
+    console.log("action", action.payload);
     switch (action.type) {
         case actionTypes.ADD_SHOPPING_CART:
             // if (state.shoppingCart.includes(action.payload)) {
