@@ -44,16 +44,17 @@ function IndexPage(props) {
 
   return (
     <div className="my-8">
-      {open ? <PopOver parentCallback={callbackHandler} /> : null}
+      {open ? <PopOver /> : null}
       <a onClick={clickHandler}>
         <SortFilter />
       </a>
       <div className="mt-4">
-        {haveResult ? (
+        {/* {haveResult ? (
           <SearchResult items={listProducts} />
         ) : (
           <ProductsPage products={products} />
-        )}
+        )} */}
+        <ProductsPage products={products} />
       </div>
     </div>
   );

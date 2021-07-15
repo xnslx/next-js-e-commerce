@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import BackIcon from "../components/ui/back";
@@ -9,16 +9,55 @@ import { toggleFavList } from "../action/action";
 import { useDispatch } from "react-redux";
 import { useSession } from "next-auth/client";
 import EmptyState from "../components/ui/emptystate";
+import axios from "axios";
 
-const SearchResult = ({ products }) => {
+const SearchResult = () => {
+  const [resultProducts, setResultProducts] = useState([]);
   const [haveData, setHaveData] = useState(false);
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const router = useRouter();
+  console.log("router", router);
+  const { query } = router;
+  const params = Object.entries(query)
+    .map(([key, value]) => {
+      if (key === "gender") {
+        return "gender=" + query[key];
+      } else if (key === "size") {
+        return "size=" + query[key];
+      } else {
+        return "category=" + query[key];
+      }
+    })
+    .join("&");
 
-  if (products !== null) {
-    setHaveData(true);
-  }
+  console.log("params", params);
+
+  useEffect(() => {
+    console.log(params);
+    async function getData() {
+      const response = await fetch("/api/filterresult?" + params, {
+        method: "POST",
+        "Content-Type": "application/json",
+      });
+      const data = await response.json();
+      console.log("data", data);
+      console.log("response", response);
+      if (data.products == null) {
+        setHaveData(false);
+      } else {
+        setResultProducts(data.products);
+        setHaveData(true);
+      }
+    }
+    getData();
+  }, []);
+
+  console.log("resultProducts", resultProducts);
+
+  //   if (products !== null) {
+  //     setHaveData(true);
+  //   }
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
@@ -27,6 +66,7 @@ const SearchResult = ({ products }) => {
       dispatch(toggleFavList(prodId));
     }
   };
+
   return (
     <>
       {haveData ? (
@@ -37,7 +77,7 @@ const SearchResult = ({ products }) => {
             </a>
           </Link>
           <div className="grid grid-cols-2 w-10/12 gap-2 ml-auto mr-auto mt-8 lg:grid-cols-3 xl:grid-cols-4 mt-6 lg:gap-8">
-            {products.map((product, index) => (
+            {resultProducts.map((product, index) => (
               <ul key={index}>
                 <Image
                   src={product.image}
@@ -66,40 +106,40 @@ const SearchResult = ({ products }) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  console.log("context", context);
-  const { query } = context;
-  console.log("query", query);
-  let result = Object.entries(query)
-    .map(([key, value]) => {
-      if (key === "gender") {
-        return "gender=" + query[key];
-      } else if (key === "size") {
-        return "size=" + query[key];
-      } else {
-        return "category=" + query[key];
-      }
-    })
-    .join("&");
+// export async function getStaticProps(context) {
+//   console.log("context", context);
+//   const { query } = context;
+//   console.log("query", query);
+//   let result = Object.entries(query)
+//     .map(([key, value]) => {
+//       if (key === "gender") {
+//         return "gender=" + query[key];
+//       } else if (key === "size") {
+//         return "size=" + query[key];
+//       } else {
+//         return "category=" + query[key];
+//       }
+//     })
+//     .join("&");
 
-  console.log("result", result);
+//   console.log("result", result);
 
-  const response = await fetch(
-    "http://localhost:3000/api/filterresult?" + result,
-    {
-      method: "POST",
-      "Content-Type": "application/json",
-    }
-  );
+//   const response = await fetch(
+//     "http://localhost:3000/api/filterresult?" + result,
+//     {
+//       method: "POST",
+//       "Content-Type": "application/json",
+//     }
+//   );
 
-  const data = await response.json();
-  console.log("data", data);
+//   const data = await response.json();
+//   console.log("data", data);
 
-  return {
-    props: {
-      products: data.products || null,
-    },
-  };
-}
+//   return {
+//     props: {
+//       products: data.products || null,
+//     },
+//   };
+// }
 
 export default SearchResult;

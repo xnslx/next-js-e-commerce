@@ -45,24 +45,29 @@ const SortFilterItems = (props) => {
   console.log("params", params);
 
   const submitHandler = async (e) => {
-    const response = await fetch("/api/filterresult?" + params, {
-      method: "POST",
-      "Content-Type": "application/json",
+    e.preventDefault();
+    router.push({
+      pathname: "/filterresult",
+      query: params,
     });
+    // const response = await fetch("/api/filterresult?" + params, {
+    //   method: "POST",
+    //   "Content-Type": "application/json",
+    // });
 
-    const data = await response.json();
-    console.log("data", data);
-    console.log("response", response);
-    if (data.products) {
-      props.cbHandler(data.products);
-      //   router.push({
-      //     pathname: "/filterresult",
-      //     query: params,
-      //   });
+    // const data = await response.json();
+    // console.log("data", data);
+    // console.log("response", response);
+    // if (data.products) {
+    //   props.cbHandler(data.products);
+    //   router.push({
+    //     pathname: "/filterresult",
+    //     query: params,
+    //   });
 
-      setMeetRequirementItems(data.products);
-    }
-    return;
+    //   setMeetRequirementItems(data.products);
+    // }
+    // return;
   };
 
   return (
