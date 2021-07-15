@@ -18,6 +18,7 @@ export default async function getProductsByFilterResult(req, res) {
     query.size = { $in: payload.size };
   if (payload.gender && payload.gender.length > 0)
     query.gender = { $in: payload.gender };
+
   const filtered = await Products.find({ prodId: { $exists: true } }).find(
     query
   );
@@ -25,8 +26,11 @@ export default async function getProductsByFilterResult(req, res) {
   console.log("filtered", filtered);
   if (filtered == "") {
     res
-      .status(403)
-      .json({ message: "Can not find the product that you are looking for." });
+      .status(201)
+      .json({
+        prodcuts: filtered,
+        message: "Can not find the product that you are looking for.",
+      });
     return;
   }
   res.status(201).json({ products: filtered });

@@ -39,7 +39,7 @@ const makeStore = (initialState = intlState) => {
   return createStore(
     persistedReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(thunk, logger))
+    composeWithDevTools(applyMiddleware(thunk))
   );
 };
 

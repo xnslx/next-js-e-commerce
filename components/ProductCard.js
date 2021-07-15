@@ -7,7 +7,6 @@ import FavoriteIcon from "../components/ui/favorite";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
-import { TOGGLE_FAVORITE_LIST } from "../action/type";
 
 function ProductCard({
   _id,
@@ -31,7 +30,7 @@ function ProductCard({
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto rounded-md overflow-hidden">
+    <div className="w-full max-w-sm mx-auto overflow-hidden">
       <div className="h-60 w-full justify-end object-contain">
         <a href={`/products/${slug.current}`}>
           <img src={urlFor(mainImage)} alt="" />
