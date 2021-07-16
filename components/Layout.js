@@ -53,8 +53,8 @@ function Layout({ children }) {
         <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <div className="w-full text-gray-700 md:text-left text-2xl font-semibold">
-                Pulp Inc.
+              <div className="w-full text-red-700 md:text-left text-2xl font-semibold">
+                M&H Inc.
               </div>
             </Link>
             <div className="flex items-center justify-end w-full lg:w-2/5 lg:justify-around">
@@ -148,7 +148,7 @@ function Layout({ children }) {
       <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
       */}
       <main className="my-8">{children}</main>
-      <footer className="bg-gray-200 w-full fixed bottom-0">
+      {/* <footer className="bg-gray-200 w-full fixed bottom-0">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <a
             href="#"
@@ -158,7 +158,7 @@ function Layout({ children }) {
           </a>
           <p className="py-2 text-gray-500 sm:py-0">All rights reserved</p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

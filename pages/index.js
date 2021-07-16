@@ -44,10 +44,10 @@ function IndexPage(props) {
 
   return (
     <div className="my-8">
-      {open ? <PopOver /> : null}
+      {/* {open ? <PopOver /> : null}
       <a onClick={clickHandler}>
         <SortFilter />
-      </a>
+      </a> */}
       <div className="mt-4">
         {/* {haveResult ? (
           <SearchResult items={listProducts} />
