@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import FavoriteIcon from "./ui/favorite";
+import LikedIcon from "./ui/liked";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
 import { addShoppingCart, removeShoppingCart } from "../action/action";
@@ -24,6 +25,8 @@ function ProductPage(props) {
   const shoppingCartList = useSelector(
     (state) => state.shoppingCart.shoppingCart
   );
+
+  const favList = useSelector((state) => state.favoriteList.favoriteList);
 
   const toggleFavListHandler = (e, prodId) => {
     console.log("prodId", prodId);
@@ -155,7 +158,11 @@ function ProductPage(props) {
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}
             >
-              <FavoriteIcon />
+              {session && favList.includes(id) ? (
+                <LikedIcon />
+              ) : (
+                <FavoriteIcon />
+              )}
             </button>
           </div>
         </div>

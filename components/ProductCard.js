@@ -4,9 +4,11 @@ import { urlFor } from "../utils/sanity";
 import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import FavoriteIcon from "../components/ui/favorite";
+import LikedIcon from "../components/ui/liked";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
+import { useSelector } from "react-redux";
 
 function ProductCard({
   _id,
@@ -20,6 +22,8 @@ function ProductCard({
   const [session, loading] = useSession();
   const router = useRouter();
   const [favProduct, setFavProduct] = useState();
+
+  const favList = useSelector((state) => state.favoriteList.favoriteList);
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
@@ -36,7 +40,7 @@ function ProductCard({
           <img src={urlFor(mainImage)} alt="" />
         </a>
         <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2">
-          <FavoriteIcon />
+          {session && favList.includes(_id) ? <LikedIcon /> : <FavoriteIcon />}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">
