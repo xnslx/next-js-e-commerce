@@ -39,9 +39,9 @@ function ProductPage(props) {
 
   const addToCartHandler = (e, prodId, count) => {
     const enteredCount = countRef.current.value;
-    console.log("count", count);
-    console.log("enteredCount", enteredCount);
-    console.log("prodId", prodId);
+    // console.log("count", count);
+    // console.log("enteredCount", enteredCount);
+    // console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {

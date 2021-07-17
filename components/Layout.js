@@ -36,6 +36,7 @@ function Layout({ children }) {
       router.push("/login");
     } else {
       dispatch(getShoppingCart());
+      router.push("/shoppingcart");
     }
   };
 

@@ -68,7 +68,7 @@ export const addShoppingCart = (productId, count) => (dispatch, getState) => {
             console.log("result", result);
             dispatch({
                 type: "ADD_SHOPPING_CART",
-                payload: result.data.shoppingCart.map((i) => i.prodId),
+                payload: result.data.shoppingCart,
             });
         })
         .catch((err) => {

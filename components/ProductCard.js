@@ -34,22 +34,22 @@ function ProductCard({
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden">
+    <div className="w-full max-w-sm mx-auto overflow-hidden border border-black">
       <div className="h-60 w-full justify-end object-contain">
         <a href={`/products/${slug.current}`}>
           <img src={urlFor(mainImage)} alt="" />
         </a>
-        <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2">
+        <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2 ml-2">
           {session && favList.includes(_id) ? <LikedIcon /> : <FavoriteIcon />}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">
-        <h3 className="text-lg font-bold uppercase">{title}</h3>
+        <h3 className="ml-2 text-lg font-bold uppercase">{title}</h3>
         <div className="flex flex-col">
-          <span className="text-lg leading-7">
+          <span className="ml-2 text-lg leading-7">
             ${defaultProductVariant?.price}
           </span>
-          <span className="text-lg leading-7">
+          <span className="ml-2 text-lg leading-7">
             {defaultProductVariant?.size}
           </span>
         </div>
