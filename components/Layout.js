@@ -68,7 +68,7 @@ function Layout({ children }) {
                 onClick={getFavoriteListHandler}
               >
                 <FavoriteIcon />
-                {session ? <span>{favList.length}</span> : ""}
+                {/* {session ? <span>{favList.length}</span> : ""} */}
               </button>
               {/* shopping cart icon */}
               <button
@@ -76,7 +76,7 @@ function Layout({ children }) {
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
                 <ShoppingCartIcon />
-                {session ? <span>{shoppingCartList.length}</span> : ""}
+                {/* {session ? <span>{shoppingCartList.length}</span> : ""} */}
               </button>
               <div className="flex sm:hidden">
                 <button

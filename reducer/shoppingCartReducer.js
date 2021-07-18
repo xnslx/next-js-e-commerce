@@ -13,7 +13,13 @@ const shoppingCartReducer = (state = intlState, action) => {
             // }
             return {
                 ...state,
-                shoppingCart: action.payload,
+                shoppingCart: [
+                    state.shoppingCart,
+                    {
+                        prodId: action.payload.map((i) => i.prdoId),
+                        quantity: action.payload.map((i) => i.quantity),
+                    },
+                ],
             };
         case actionTypes.REMOVE_SHOPPING_CART:
             return {

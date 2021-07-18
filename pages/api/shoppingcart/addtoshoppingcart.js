@@ -128,6 +128,7 @@ const getShoppingCart = async(req, res) => {
         try {
             const user = await User.findOne({ email: session.user.email });
             const shoppingcart = user.shoppingCart.items;
+            console.log("shoppingcart", shoppingcart);
 
             if (shoppingcart) {
                 const detailedproducts = await User.aggregate([{
@@ -155,7 +156,10 @@ const getShoppingCart = async(req, res) => {
                 });
                 res
                     .status(200)
-                    .json({ shoppingCart: targetUser.userShoppingCartItems });
+                    .json({
+                        shoppingCart: targetUser.userShoppingCartItems,
+                        items: shoppingcart,
+                    });
             } else {
                 res.status(200).json({ message: "shopping cart is empty." });
             }

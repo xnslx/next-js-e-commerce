@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Error from "next/error";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import ProductsPage from "../components/ProductsPage";
@@ -44,6 +45,13 @@ function IndexPage(props) {
 
   return (
     <div className="my-8">
+      <Head>
+        <title>Nextjs TailwindCSS Sanityio EcommerceWebsite</title>
+        <meta
+          name="description"
+          content="a website to sell gently used kids' clothing"
+        />
+      </Head>
       {/* {open ? <PopOver /> : null}
       <a onClick={clickHandler}>
         <SortFilter />
