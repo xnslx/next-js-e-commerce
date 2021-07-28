@@ -159,6 +159,7 @@ const getShoppingCart = async(req, res) => {
                     }
                 });
                 res.status(200).json({
+                    message: "This is your shopping cart",
                     shoppingCart: targetUser.userShoppingCartItems,
                     items: shoppingcart,
                 });

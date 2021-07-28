@@ -65,7 +65,7 @@ export const addShoppingCart = (productId, count) => (dispatch, getState) => {
             quantity: count,
         })
         .then((result) => {
-            console.log("result", result);
+            console.log("actionjs2", result);
             dispatch({
                 type: "ADD_SHOPPING_CART",
                 payload: result.data.shoppingCart,
@@ -79,35 +79,33 @@ export const addShoppingCart = (productId, count) => (dispatch, getState) => {
         });
 };
 
-export const removeShoppingCart = (productId, count) => (
-    dispatch,
-    getState
-) => {
-    axios
-        .post("http://localhost:3000/api/shoppingcart/removefromshoppingcart", {
-            prodId: productId,
-            quantity: count,
-        })
-        .then((result) => {
-            console.log("result", result);
-            dispatch({
-                type: "REMOVE_SHOPPING_CART",
-                payload: productId,
+export const removeShoppingCart =
+    (productId, count) => (dispatch, getState) => {
+        axios
+            .post("http://localhost:3000/api/shoppingcart/removefromshoppingcart", {
+                prodId: productId,
+                quantity: count,
+            })
+            .then((result) => {
+                console.log("result", result);
+                dispatch({
+                    type: "REMOVE_SHOPPING_CART",
+                    payload: productId,
+                });
+            })
+            .catch((err) => {
+                dispatch({
+                    type: "GET_ERROR",
+                    payload: err.response.data,
+                });
             });
-        })
-        .catch((err) => {
-            dispatch({
-                type: "GET_ERROR",
-                payload: err.response.data,
-            });
-        });
-};
+    };
 
 export const getShoppingCart = () => (dispatch) => {
     axios
         .get("http://localhost:3000/api/shoppingcart/addtoshoppingcart")
         .then((result) => {
-            console.log("result", result);
+            console.log("getShoppingCart", result);
             dispatch({
                 type: "GET_SHOPPING_CART",
                 payload: result.data.shoppingCart,

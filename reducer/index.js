@@ -17,12 +17,7 @@ let store;
 
 export const intlState = {
   favoriteList: [],
-  shoppingCart: [
-    {
-      prodId: "",
-      quantity: "",
-    },
-  ],
+  shoppingCart: [],
 };
 
 const persistConfig = {
