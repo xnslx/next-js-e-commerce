@@ -23,7 +23,9 @@ function ProductCard({
   const router = useRouter();
   const [favProduct, setFavProduct] = useState();
 
-  const favList = useSelector((state) => state.favoriteList.favoriteList);
+  const favList = useSelector((state) => state.favoriteList);
+
+  console.log("favList", favList);
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
@@ -40,7 +42,11 @@ function ProductCard({
           <img src={urlFor(mainImage)} alt="" />
         </a>
         <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2 ml-2">
-          {session && favList.includes(_id) ? <LikedIcon /> : <FavoriteIcon />}
+          {session && favList.favoriteList.includes(_id) ? (
+            <LikedIcon />
+          ) : (
+            <FavoriteIcon />
+          )}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">

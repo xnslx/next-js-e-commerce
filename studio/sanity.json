@@ -14,7 +14,8 @@
         "@sanity/default-layout",
         "@sanity/default-login",
         "@sanity/desk-tool",
-        "@sanity/color-input"
+        "@sanity/color-input",
+        "@sane-shopify/sanity-plugin"
     ],
     "env": {
         "development": {

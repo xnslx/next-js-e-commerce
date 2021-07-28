@@ -2,7 +2,11 @@ import { useState } from "react";
 import Error from "next/error";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getClient, usePreviewSubscription } from "../utils/sanity";
+import {
+  getClient,
+  usePreviewSubscription,
+  sanityClient,
+} from "../utils/sanity";
 import ProductsPage from "../components/ProductsPage";
 
 import PopOver from "../components/ui/popover";
@@ -15,6 +19,7 @@ const query = `//groq
 `;
 
 function IndexPage(props) {
+  console.log("indexjs", props);
   const [open, setOpen] = useState(false);
   const [listProducts, setListProducts] = useState(products);
   const [haveResult, setHaveResult] = useState(false);
@@ -43,6 +48,8 @@ function IndexPage(props) {
     enabled: preview || router.query.preview !== null,
   });
 
+  // console.log("indexjs", products);
+
   return (
     <div className="my-8">
       <Head>
@@ -70,11 +77,16 @@ function IndexPage(props) {
 
 export async function getStaticProps({ params = {}, preview = false }) {
   const productsData = await getClient(preview).fetch(query);
+  const shopifyProducts = await sanityClient.fetch(
+    `*[_type == "shopifyProduct"]`
+  );
   console.log("productsData", productsData);
+  console.log("shopifyProducts", shopifyProducts);
   return {
     props: {
       preview,
       productsData,
+      shopifyProducts,
     },
   };
 }

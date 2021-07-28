@@ -14,6 +14,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@sane-shopify/sanity-plugin": "^0.22.2",
     "@sanity/base": "^2.3.2",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/color-input": "^2.2.6",
@@ -23,6 +24,7 @@
     "@sanity/default-login": "^2.2.6",
     "@sanity/desk-tool": "^2.3.2",
     "@sanity/vision": "^2.2.6",
+    "graphql": "^15.5.1",
     "prop-types": "^15.7",
     "react": "16.14.0",
     "react-dom": "16.14.0",

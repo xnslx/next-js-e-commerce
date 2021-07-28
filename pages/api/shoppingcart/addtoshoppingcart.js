@@ -2,6 +2,7 @@ import Products from "../../../models/Products";
 import User from "../../../models/User";
 import { connectToDatabase } from "../../../utils/db";
 import { getSession } from "next-auth/client";
+import mongoose from "mongoose";
 
 export default async(req, res) => {
     switch (req.method) {
@@ -59,6 +60,7 @@ const toggleShoppingCart = async(req, res) => {
             } else if (checkNewlyAddedItemIndex < 0) {
                 // no item found in the shopping cart, add item with quantity to the shopping cart
                 const userShoppingCart = user.shoppingCart.items;
+                console.log("userShoppingCart", userShoppingCart);
                 const updatedList = await userShoppingCart.concat({
                     prodId: prodId,
                     quantity: total,
@@ -68,8 +70,10 @@ const toggleShoppingCart = async(req, res) => {
                 const updatedCart = {
                     items: updatedList,
                 };
+                console.log("updatedCart", updatedCart);
                 user.shoppingCart = updatedCart;
                 user.save();
+                console.log("user.shoppingCart", user.shoppingCart);
                 res.status(201).json({
                     message: "Add product to shopping cart",
                     shoppingCart: user.shoppingCart.items,
@@ -154,12 +158,10 @@ const getShoppingCart = async(req, res) => {
                         return i;
                     }
                 });
-                res
-                    .status(200)
-                    .json({
-                        shoppingCart: targetUser.userShoppingCartItems,
-                        items: shoppingcart,
-                    });
+                res.status(200).json({
+                    shoppingCart: targetUser.userShoppingCartItems,
+                    items: shoppingcart,
+                });
             } else {
                 res.status(200).json({ message: "shopping cart is empty." });
             }
