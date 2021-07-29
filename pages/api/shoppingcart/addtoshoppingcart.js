@@ -1,6 +1,7 @@
 import Products from "../../../models/Products";
 import User from "../../../models/User";
 import { connectToDatabase } from "../../../utils/db";
+import arrayUnique from "../../../utils/helper";
 import { getSession } from "next-auth/client";
 import mongoose from "mongoose";
 
@@ -158,6 +159,13 @@ const getShoppingCart = async(req, res) => {
                         return i;
                     }
                 });
+
+                // user.save();
+                // const test = await arrayUnique(
+                //     shoppingcart,
+                //     targetUser.userShoppingCartItems
+                // );
+                // console.log("test", test);
                 res.status(200).json({
                     message: "This is your shopping cart",
                     shoppingCart: targetUser.userShoppingCartItems,
