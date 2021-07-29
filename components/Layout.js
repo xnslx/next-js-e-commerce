@@ -23,6 +23,8 @@ function Layout({ children }) {
     (state) => state.shoppingCart.shoppingCart
   );
 
+  console.log("layoutjs", shoppingCartList);
+
   const [session, loading] = useSession();
 
   const logoutHandler = () => {

@@ -1,5 +1,6 @@
 import * as actionTypes from "../action/type";
 import { intlState } from "./index";
+import arrayUnique from "../utils/helper";
 
 const shoppingCartReducer = (state = intlState, action) => {
     console.log("action", action.payload);
@@ -21,7 +22,12 @@ const shoppingCartReducer = (state = intlState, action) => {
                 shoppingCart: state.shoppingCart.filter((id) => id !== action.payload),
             };
         case actionTypes.GET_SHOPPING_CART:
-            return {...state, shoppingCart: action.payload };
+            const result = arrayUnique(
+                action.payload.items,
+                action.payload.shoppingCart
+            );
+            console.log("result", result);
+            return {...state, shoppingCart: result };
         case actionTypes.EMPTY_SHOPPING_CART:
             return {
                 ...state,

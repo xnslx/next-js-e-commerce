@@ -25,7 +25,7 @@ function ProductCard({
 
   const favList = useSelector((state) => state.favoriteList);
 
-  console.log("favList", favList);
+  // console.log("favList", favList);
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {

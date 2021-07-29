@@ -108,7 +108,7 @@ export const getShoppingCart = () => (dispatch) => {
             console.log("getShoppingCart", result);
             dispatch({
                 type: "GET_SHOPPING_CART",
-                payload: result.data.shoppingCart,
+                payload: result.data,
             });
         })
         .catch((err) => {
