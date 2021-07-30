@@ -22,6 +22,7 @@ function ProductCard({
   const [session, loading] = useSession();
   const router = useRouter();
   const [favProduct, setFavProduct] = useState();
+  const [like, setLike] = useState(false);
 
   const favList = useSelector((state) => state.favoriteList);
 
@@ -32,6 +33,10 @@ function ProductCard({
       router.push("/login");
     } else {
       dispatch(toggleFavList(prodId));
+      setLike((pre) => ({
+        ...prev,
+        [prodId]: false,
+      }));
     }
   };
 
@@ -42,11 +47,11 @@ function ProductCard({
           <img src={urlFor(mainImage)} alt="" />
         </a>
         <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2 ml-2">
-          {/* {session && favList.favoriteList.includes(_id) ? (
+          {session && favList.favoriteList.includes(_id) ? (
             <LikedIcon />
           ) : (
             <FavoriteIcon />
-          )} */}
+          )}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">

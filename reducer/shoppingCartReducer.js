@@ -3,7 +3,7 @@ import { intlState } from "./index";
 // import arrayUnique from "../utils/helper";
 
 const shoppingCartReducer = (state = intlState, action) => {
-    console.log("action", action.payload);
+    // console.log("action", action.payload);
     switch (action.type) {
         case actionTypes.ADD_SHOPPING_CART:
             // if (state.shoppingCart.includes(action.payload)) {
@@ -27,7 +27,13 @@ const shoppingCartReducer = (state = intlState, action) => {
             //     action.payload.shoppingCart
             // );
             // console.log("result", result);
-            return {...state, shoppingCart: action.payload };
+            return {
+                ...state,
+                shoppingCart: {
+                    items: action.payload.items,
+                    cart: action.payload.shoppingCart,
+                },
+            };
         case actionTypes.EMPTY_SHOPPING_CART:
             return {
                 ...state,
