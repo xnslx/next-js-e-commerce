@@ -37,14 +37,14 @@ function IndexPage(props) {
     setHaveResult(true);
   };
 
-  const { productsData, preview } = props;
+  const { productsData, targetProducts, preview } = props;
   const router = useRouter();
 
   if (!router.isFallback && !productsData) {
     return <Error statusCode={404} />;
   }
   const { data: products } = usePreviewSubscription(query, {
-    initialData: productsData,
+    initialData: targetProducts,
     enabled: preview || router.query.preview !== null,
   });
 
@@ -80,13 +80,21 @@ export async function getStaticProps({ params = {}, preview = false }) {
   const shopifyProducts = await sanityClient.fetch(
     `*[_type == "shopifyProduct"]`
   );
+  const targetProducts = await sanityClient.fetch(`
+    *[_type == 'product']{
+      ...,
+      'shopifyproduct': shopifyproduct[] ->
+    }
+  `);
   console.log("productsData", productsData);
   console.log("shopifyProducts", shopifyProducts);
+  console.log("targetProducts", targetProducts);
   return {
     props: {
       preview,
       productsData,
       shopifyProducts,
+      targetProducts,
     },
   };
 }
