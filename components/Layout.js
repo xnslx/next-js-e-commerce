@@ -9,12 +9,15 @@ import { logoutUser } from "../action/action";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { getProductFavList, getShoppingCart } from "../action/action";
+import { getCart } from "../utils/shopify";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const handleMenu = () => setMenuOpen(!menuOpen);
   const handleOpen = () => setCartOpen(!cartOpen);
+  const [haveProducts, setHaveProducts] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -27,6 +30,18 @@ function Layout({ children }) {
 
   const [session, loading] = useSession();
 
+  useEffect(() => {
+    getCart().then((res) => {
+      if (res !== undefined) {
+        console.log("shoppingcartjs", res.lineItems);
+        setHaveProducts(true);
+        setCartItems(res.lineItems);
+      } else {
+        setHaveProducts(false);
+      }
+    });
+  }, [shoppingCartList, favList]);
+
   const logoutHandler = () => {
     signOut();
     dispatch(logoutUser());
@@ -37,7 +52,7 @@ function Layout({ children }) {
     if (!session) {
       router.push("/login");
     } else {
-      dispatch(getShoppingCart());
+      // dispatch(getShoppingCart());
       router.push("/shoppingcart");
     }
   };
@@ -71,7 +86,7 @@ function Layout({ children }) {
                 onClick={getFavoriteListHandler}
               >
                 <FavoriteIcon />
-                {session ? <span>{favList.length}</span> : ""}
+                {session && favList ? <span>{favList.length}</span> : ""}
               </button>
               {/* shopping cart icon */}
               <button
@@ -79,7 +94,7 @@ function Layout({ children }) {
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
                 <ShoppingCartIcon />
-                {session ? <span>{shoppingCartList.cart.length}</span> : ""}
+                {session && cartItems ? <span>{cartItems.length}</span> : ""}
               </button>
               <div className="flex sm:hidden">
                 <button

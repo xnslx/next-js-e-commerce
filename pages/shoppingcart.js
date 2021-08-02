@@ -10,35 +10,48 @@ import { getCart } from "../utils/shopify";
 
 const Shoppingcart = () => {
   const [haveProducts, setHaveProducts] = useState(false);
-  const shoppingCartList = useSelector(
-    (state) => state.shoppingCart.shoppingCart.cart
-  );
+  const [cartItems, setCartItems] = useState([]);
 
-  const itemsQuantity = useSelector(
-    (state) => state.shoppingCart.shoppingCart.items
-  );
+  useEffect(() => {
+    getCart().then((res) => {
+      if (res !== undefined) {
+        console.log("shoppingcartjs", res.lineItems);
+        setHaveProducts(true);
+        setCartItems(res.lineItems);
+      } else {
+        setHaveProducts(false);
+      }
+    });
+  }, []);
+  // const shoppingCartList = useSelector(
+  //   (state) => state.shoppingCart.shoppingCart.cart
+  // );
+
+  // const itemsQuantity = useSelector(
+  //   (state) => state.shoppingCart.shoppingCart.items
+  // );
 
   // console.log("itemsQuantity", itemsQuantity);
 
   // const test = arrayUnique(itemsQuantity, shoppingCartList);
 
-  const cartItems = itemsQuantity.reduce((acc, item) => {
-    // console.log("acc", acc);
-    // console.log("item", item);
-    const foundItem = shoppingCartList.find((i) => i.prodId === item.prodId);
-    return foundItem
-      ? [...acc, { foundItem, quantity: item.quantity }]
-      : [...acc];
-  }, []);
+  // const cartItems = itemsQuantity.reduce((acc, item) => {
+  //   // console.log("acc", acc);
+  //   // console.log("item", item);
+  //   const foundItem = shoppingCartList.find((i) => i.prodId === item.prodId);
+  //   return foundItem
+  //     ? [...acc, { foundItem, quantity: item.quantity }]
+  //     : [...acc];
+  // }, []);
   // console.log("cartItems", cartItems);
 
-  useEffect(() => {
-    if (shoppingCartList == null) {
-      setHaveProducts(false);
-    } else {
-      setHaveProducts(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (shoppingCartList == null) {
+  //     setHaveProducts(false);
+  //   } else {
+  //     setHaveProducts(true);
+  //   }
+  // }, []);
 
   // console.log("shoppingcart", shoppingCartList);
   return (
@@ -56,7 +69,7 @@ const Shoppingcart = () => {
         )}
       </div>
       <button
-        className="border font-mono p-2 w-full  bg-lime-300 border-black shadow-offset-black"
+        className="border-4 fixed bottom-0 font-mono p-2 w-full  bg-lime-300 border-black shadow-offset-black"
         onClick={async () => {
           const { webUrl } = await getCart();
           Router.replace(webUrl);

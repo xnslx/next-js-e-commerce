@@ -28,6 +28,8 @@ function ProductCard({
 
   // console.log("favList", favList);
 
+  useEffect(() => {}, [favList]);
+
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
       router.push("/login");

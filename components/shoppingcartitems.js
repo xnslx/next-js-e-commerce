@@ -1,33 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 const ShoppingCartItems = ({ items }) => {
   console.log("items", items);
+
+  // const { lineItems, id, totalPrice } = props.items;
+  // console.log(lineItems);
   return (
     <div>
-      {items.map((i, index) => (
-        <ul key={index} className="flex flex-row mb-6">
-          <Image src={i.foundItem.image} width={90} height={120} />
-          <div className="ml-4 mt-2">
-            <li>
-              <strong className="pr-2">Name:</strong>
-              {i.foundItem.name}
-            </li>
-            <li>
-              <strong className="pr-2">Size:</strong>
-              {i.foundItem.size}
-            </li>
-            <li>
-              <strong className="pr-2">Price:</strong>
-              {i.foundItem.price}
-            </li>
-            <li>
-              <strong className="pr-2">Quantity:</strong>
-              {i.quantity}
-            </li>
+      {items &&
+        items.map((i, index) => (
+          <div key={index} className="flex flex-row">
+            <Image src={i.variant.image.src} width={90} height={120} />
+            <div className="pl-4">
+              <p>{i.title}</p>
+              <p>${i.variant.price}</p>
+              <p>Quantity: {i.quantity}</p>
+            </div>
           </div>
-        </ul>
-      ))}
+        ))}
     </div>
   );
 };

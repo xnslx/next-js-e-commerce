@@ -185,7 +185,7 @@ function ProductPage(props) {
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}
             >
-              {session && favList.includes(id) ? (
+              {session && favList && favList.includes(id) ? (
                 <LikedIcon />
               ) : (
                 <FavoriteIcon />
