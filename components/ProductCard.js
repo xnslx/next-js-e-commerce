@@ -33,7 +33,7 @@ function ProductCard({
       router.push("/login");
     } else {
       dispatch(toggleFavList(prodId));
-      setLike((pre) => ({
+      setLike((prev) => ({
         ...prev,
         [prodId]: false,
       }));
@@ -47,11 +47,11 @@ function ProductCard({
           <img src={urlFor(mainImage)} alt="" />
         </a>
         <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2 ml-2">
-          {/* {session && favList.favoriteList.includes(_id) ? (
+          {session && favList.favoriteList.includes(_id) ? (
             <LikedIcon />
           ) : (
             <FavoriteIcon />
-          )} */}
+          )}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">

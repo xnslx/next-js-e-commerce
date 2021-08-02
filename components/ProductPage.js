@@ -5,9 +5,11 @@ import LikedIcon from "./ui/liked";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
 import { addShoppingCart, removeShoppingCart } from "../action/action";
+import { addProductToCart } from "../utils/shopify";
 import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import Router from "next/router";
 
 function ProductPage(props) {
   const dispatch = useDispatch();
@@ -15,7 +17,16 @@ function ProductPage(props) {
   const handleCount = (value) =>
     !(count === 0 && value === -1) ? setCount(count + value) : count;
 
-  const { id, title, defaultProductVariant, mainImage, body } = props;
+  const {
+    id,
+    title,
+    defaultProductVariant,
+    mainImage,
+    body,
+    shopifyproduct,
+  } = props;
+
+  console.log("shopifyproduct", shopifyproduct);
 
   const [session, loading] = useSession();
   const router = useRouter();
@@ -64,7 +75,23 @@ function ProductPage(props) {
     if (!session) {
       router.push("/login");
     } else {
-      dispatch(addShoppingCart(prodId, count));
+      // dispatch(addShoppingCart(prodId, count));
+      try {
+        if (count < 1) return;
+        const variants = shopifyproduct.map((i) => i.variants);
+        const [items] = variants;
+        const variantIdItem = items.map((i) => i.id);
+        const [variantId] = variantIdItem;
+        addProductToCart([
+          {
+            variantId,
+            quantity: Number(count),
+          },
+        ]);
+        Router.push("/shoppingcart");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -158,11 +185,11 @@ function ProductPage(props) {
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}
             >
-              {/* {session && favList.includes(id) ? (
+              {session && favList.includes(id) ? (
                 <LikedIcon />
               ) : (
                 <FavoriteIcon />
-              )} */}
+              )}
             </button>
           </div>
         </div>

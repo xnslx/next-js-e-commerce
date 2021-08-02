@@ -90,6 +90,11 @@ export default {
                 }, ],
             }, ],
         },
+        {
+            name: "shopifyId",
+            title: "ShopifyId",
+            type: "string",
+        },
     ],
 
     preview: {

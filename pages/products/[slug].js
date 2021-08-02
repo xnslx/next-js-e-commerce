@@ -14,13 +14,13 @@ function ProductPageContainer({ productData, targetProduct, preview }) {
   console.log("targetProduct ", targetProduct);
   console.log("productData", productData);
   const router = useRouter();
-  if (!router.isFallback && !productData?.slug) {
+  if (!router.isFallback && !targetProduct?.slug) {
     return <Error statusCode={404} />;
   }
 
   const { data: product = {} } = usePreviewSubscription(query, {
-    params: { slug: productData?.slug?.current },
-    initialData: productData,
+    params: { slug: targetProduct?.slug?.current },
+    initialData: targetProduct,
     enabled: preview || router.query.preview !== null,
   });
 
@@ -36,6 +36,9 @@ function ProductPageContainer({ productData, targetProduct, preview }) {
     categories,
     slug,
   } = product;
+  const { shopifyproduct } = targetProduct;
+  console.log("shopifyproduct", shopifyproduct);
+
   return (
     <ProductPage
       id={_id}
@@ -48,6 +51,7 @@ function ProductPageContainer({ productData, targetProduct, preview }) {
       vendor={vendor}
       categories={categories}
       slug={slug?.current}
+      shopifyproduct={shopifyproduct}
     />
   );
 }
