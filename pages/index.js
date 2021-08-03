@@ -51,7 +51,7 @@ function IndexPage(props) {
   // console.log("indexjs", products);
 
   return (
-    <div className="my-8">
+    <div className="my-8 bg-primary">
       <Head>
         <title>Nextjs TailwindCSS Sanityio EcommerceWebsite</title>
         <meta

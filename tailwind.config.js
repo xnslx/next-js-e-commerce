@@ -17,6 +17,7 @@ module.exports = {
                 lime: colors.lime,
                 "light-blue": colors.lightBlue,
                 cyan: colors.cyan,
+                primary: "#F2ECE1",
             },
             boxShadow: {
                 "offset-lime": "4px 4px lime",

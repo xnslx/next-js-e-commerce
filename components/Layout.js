@@ -67,7 +67,7 @@ function Layout({ children }) {
   };
 
   return (
-    <div className="bg-white">
+    <div className="">
       <header>
         <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-between">

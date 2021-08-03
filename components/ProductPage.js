@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import FavoriteIcon from "./ui/favorite";
 import LikedIcon from "./ui/liked";
+import AddIcon from "./ui/add";
+import MinusIcon from "./ui/minus";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
 import { addShoppingCart, removeShoppingCart } from "../action/action";
@@ -109,24 +111,27 @@ function ProductPage(props) {
             alt={mainImage?.alt || `Photo of ${title}`}
           />
         </div>
-        <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-          <h3 className="text-2xl leading-7 mb-2 font-bold uppercase">
+        <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2 lg:py-12">
+          <h3 className="text-3xl leading-7 mb-2 font-bold uppercase lg:text-5xl">
             {title}
           </h3>
           <span className="text-2xl leading-7 font-bold mt-3">
             ${defaultProductVariant?.price}
           </span>
-          <hr className="my-3" />
-          <div className="mt-2">
-            <label className="text-gray-700 text-sm" htmlFor="count">
+          <div className="mt-8">
+            <label className="text-1xl" htmlFor="count">
               Count:
             </label>
-            <div className="flex items-center mt-1">
+            <div className="flex items-center mt-4">
               <button
                 onClick={() => handleCount(1)}
-                className="text-gray-500 focus:outline-none focus:text-gray-600"
+                className="border border-black w-36 h-12 text-gray-500 focus:outline-none focus:text-gray-600"
               >
-                <svg
+                <div className="flex justify-center">
+                  <AddIcon />
+                </div>
+
+                {/* <svg
                   className="h-6 w-6"
                   fill="none"
                   strokeLinecap="round"
@@ -136,16 +141,19 @@ function ProductPage(props) {
                   stroke="currentColor"
                 >
                   <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                </svg> */}
               </button>
-              <span className="text-gray-700 text-lg mx-2" ref={countRef}>
+              <span className="text-2xl mx-2" ref={countRef}>
                 {count}
               </span>
               <button
                 onClick={() => handleCount(-1)}
-                className="text-gray-500 focus:outline-none focus:text-gray-600"
+                className="border border-black w-36 h-12 text-gray-500 focus:outline-none focus:text-gray-600"
               >
-                <svg
+                <div className="flex justify-center">
+                  <MinusIcon />
+                </div>
+                {/* <svg
                   className="h-6 w-6"
                   fill="none"
                   strokeLinecap="round"
@@ -155,7 +163,7 @@ function ProductPage(props) {
                   stroke="currentColor"
                 >
                   <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                </svg> */}
               </button>
             </div>
           </div>
