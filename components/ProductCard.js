@@ -8,7 +8,7 @@ import LikedIcon from "../components/ui/liked";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleFavList } from "../action/action";
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 
 function ProductCard({
   _id,
@@ -24,11 +24,9 @@ function ProductCard({
   const [favProduct, setFavProduct] = useState();
   const [like, setLike] = useState(false);
 
-  const favList = useSelector((state) => state.favoriteList);
+  const favList = useSelector((state) => state.favoriteList.favoriteList);
 
-  // console.log("favList", favList);
-
-  useEffect(() => {}, [favList]);
+  console.log("favList", favList);
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
@@ -49,11 +47,12 @@ function ProductCard({
           <img src={urlFor(mainImage)} alt="" />
         </a>
         <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2 ml-2">
-          {session && favList.favoriteList.includes(_id) ? (
+          {session && favList && favList.favIds.includes(_id) ? (
             <LikedIcon />
           ) : (
             <FavoriteIcon />
           )}
+          {/* <FavoriteIcon /> */}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">

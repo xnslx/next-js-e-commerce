@@ -16,7 +16,10 @@ import shoppingCartReducer from "./shoppingCartReducer";
 let store;
 
 export const intlState = {
-  favoriteList: [],
+  favoriteList: {
+    favIds: [],
+    items: [],
+  },
   shoppingCart: {
     items: [],
     cart: [],

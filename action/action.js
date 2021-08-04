@@ -7,7 +7,7 @@ export const toggleFavList = (productId) => (dispatch, getState) => {
             console.log("result", result);
             dispatch({
                 type: "ADD_FAVORITE_LIST",
-                payload: result.data.favList.map((i) => i.prodId),
+                payload: result.data,
             });
         })
         .catch((err) => {
@@ -25,7 +25,7 @@ export const getProductFavList = () => (dispatch) => {
             console.log("result", result);
             dispatch({
                 type: "GET_PRODUCT_FAVORITE_LIST",
-                payload: result.data.favoriteList,
+                payload: result.data,
             });
         })
         .catch((err) => {
@@ -79,27 +79,29 @@ export const addShoppingCart = (productId, count) => (dispatch, getState) => {
         });
 };
 
-export const removeShoppingCart =
-    (productId, count) => (dispatch, getState) => {
-        axios
-            .post("http://localhost:3000/api/shoppingcart/removefromshoppingcart", {
-                prodId: productId,
-                quantity: count,
-            })
-            .then((result) => {
-                console.log("result", result);
-                dispatch({
-                    type: "REMOVE_SHOPPING_CART",
-                    payload: productId,
-                });
-            })
-            .catch((err) => {
-                dispatch({
-                    type: "GET_ERROR",
-                    payload: err.response.data,
-                });
+export const removeShoppingCart = (productId, count) => (
+    dispatch,
+    getState
+) => {
+    axios
+        .post("http://localhost:3000/api/shoppingcart/removefromshoppingcart", {
+            prodId: productId,
+            quantity: count,
+        })
+        .then((result) => {
+            console.log("result", result);
+            dispatch({
+                type: "REMOVE_SHOPPING_CART",
+                payload: productId,
             });
-    };
+        })
+        .catch((err) => {
+            dispatch({
+                type: "GET_ERROR",
+                payload: err.response.data,
+            });
+        });
+};
 
 export const getShoppingCart = () => (dispatch) => {
     axios

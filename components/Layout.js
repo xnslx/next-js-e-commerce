@@ -6,7 +6,7 @@ import FavoriteIcon from "./ui/favorite";
 import { getSession, signIn, signOut, useSession } from "next-auth/client";
 import { useSelector } from "react-redux";
 import { logoutUser } from "../action/action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useStore } from "react-redux";
 import { useRouter } from "next/router";
 import { getProductFavList, getShoppingCart } from "../action/action";
 import { getCart } from "../utils/shopify";
@@ -22,24 +22,36 @@ function Layout({ children }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const favList = useSelector((state) => state.favoriteList.favoriteList);
-  const shoppingCartList = useSelector(
-    (state) => state.shoppingCart.shoppingCart
-  );
+  console.log("layoutjs", favList);
+  const shoppingCartList = useSelector((state) => state.shoppingCart);
 
   console.log("layoutjs", shoppingCartList);
 
+  const store = useStore().getState();
+  console.log("store", store);
+
   const [session, loading] = useSession();
 
-  useEffect(() => {
-    getCart().then((res) => {
-      if (res !== undefined) {
-        console.log("shoppingcartjs", res.lineItems);
-        setHaveProducts(true);
-        setCartItems(res.lineItems);
-      } else {
-        setHaveProducts(false);
-      }
-    });
+  useEffect(async () => {
+    // getCart().then((res) => {
+    //   if (res !== undefined) {
+    //     console.log("shoppingcartjs", res.lineItems);
+    //     setHaveProducts(true);
+    //     setCartItems(res.lineItems);
+    //   } else {
+    //     setHaveProducts(false);
+    //   }
+    // });
+
+    const cart = await getCart();
+    if (cart !== undefined) {
+      console.log("cart", cart);
+
+      setHaveProducts(true);
+      // setCartItems(cart.lineItems);
+    } else {
+      setHaveProducts(false);
+    }
   }, [shoppingCartList, favList]);
 
   const logoutHandler = () => {
@@ -86,7 +98,7 @@ function Layout({ children }) {
                 onClick={getFavoriteListHandler}
               >
                 <FavoriteIcon />
-                {session && favList ? <span>{favList.length}</span> : ""}
+                {session && favList ? <span>{favList.favIds.length}</span> : ""}
               </button>
               {/* shopping cart icon */}
               <button

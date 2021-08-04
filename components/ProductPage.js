@@ -41,6 +41,8 @@ function ProductPage(props) {
 
   const favList = useSelector((state) => state.favoriteList.favoriteList);
 
+  console.log("productpage", favList);
+
   const toggleFavListHandler = (e, prodId) => {
     console.log("prodId", prodId);
     if (!session) {
@@ -193,7 +195,7 @@ function ProductPage(props) {
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}
             >
-              {session && favList && favList.includes(id) ? (
+              {session && favList && favList.favIds.includes(id) ? (
                 <LikedIcon />
               ) : (
                 <FavoriteIcon />

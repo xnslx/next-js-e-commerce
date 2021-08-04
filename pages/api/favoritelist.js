@@ -26,15 +26,75 @@ const toggleFavoriteList = async (req, res) => {
       const itemIndex = favList.map((item) => item.prodId).indexOf(prodId);
       if (itemIndex >= 0) {
         const result = await user.removeProductFromFavList(product);
+        const detailedproducts = await User.aggregate([
+          {
+            $lookup: {
+              from: "products",
+              let: {
+                favoriteList: "$favoriteList.items.prodId",
+              },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        {
+                          $in: ["$prodId", "$$favoriteList"],
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              as: "userFavoriteListItems",
+            },
+          },
+        ]);
+        const targetUser = await detailedproducts.find((i) => {
+          if (i.email === session.user.email) {
+            return i;
+          }
+        });
         res.status(201).json({
           message: "Remove product from favorite list",
-          favList: result.favoriteList.items,
+          favIds: result.favoriteList.items,
+          favItems: targetUser.userFavoriteListItems,
         });
       } else if (itemIndex < 0) {
         const result = await user.addToFavoritesList(product);
+        const detailedproducts = await User.aggregate([
+          {
+            $lookup: {
+              from: "products",
+              let: {
+                favoriteList: "$favoriteList.items.prodId",
+              },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        {
+                          $in: ["$prodId", "$$favoriteList"],
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              as: "userFavoriteListItems",
+            },
+          },
+        ]);
+        const targetUser = await detailedproducts.find((i) => {
+          if (i.email === session.user.email) {
+            return i;
+          }
+        });
         res.status(201).json({
           message: "Add product to favorite list",
-          favList: result.favoriteList.items,
+          favIds: result.favoriteList.items,
+          favItems: targetUser.userFavoriteListItems,
         });
       }
     } catch (err) {
@@ -82,7 +142,11 @@ const getFavoriteList = async (req, res) => {
           return i;
         }
       });
-      res.status(200).json({ favoriteList: targetUser.userFavoriteListItems });
+      res.status(200).json({
+        message: "This is your favorite list.",
+        favIds: favoriteList,
+        favItems: targetUser.userFavoriteListItems,
+      });
     } catch (err) {
       console.log(err);
     }
