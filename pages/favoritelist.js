@@ -28,7 +28,7 @@ const Favoritelist = () => {
 
   const deleteHandler = (e, prodId) => {
     dispatch(toggleFavList(prodId));
-    // dispatch(getProductFavList());
+    dispatch(getProductFavList());
     setFavItems(favoriteList.items);
   };
 
@@ -37,9 +37,9 @@ const Favoritelist = () => {
       <h3 className="text-gray-700 text-center text-5xl font-semibold mb-8">
         Favorite List
       </h3>
-      {haveProducts && favItems ? (
+      {haveProducts && favoriteList && favoriteList.items ? (
         <div className=" w-10/12 gap-2 ml-auto mr-auto mt-12 lg:grid-cols-3 xl:grid-cols-4 mt-6 lg:gap-8">
-          {favItems.map((i, index) => (
+          {favoriteList.items.map((i, index) => (
             <ul key={index} className="flex flex-row mb-6">
               <Image src={i.image} height={90} width={100} />
               <div className="ml-6">
