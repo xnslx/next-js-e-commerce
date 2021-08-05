@@ -15,7 +15,6 @@ const Shoppingcart = () => {
   useEffect(() => {
     getCart().then((res) => {
       if (res !== undefined) {
-        console.log("shoppingcartjs", res.lineItems);
         setHaveProducts(true);
         setCartItems(res.lineItems);
       } else {
@@ -23,6 +22,8 @@ const Shoppingcart = () => {
       }
     });
   }, []);
+
+  console.log("cartItems", cartItems);
   // const shoppingCartList = useSelector(
   //   (state) => state.shoppingCart.shoppingCart.cart
   // );

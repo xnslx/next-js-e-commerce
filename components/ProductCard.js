@@ -26,7 +26,7 @@ function ProductCard({
 
   const favList = useSelector((state) => state.favoriteList.favoriteList);
 
-  console.log("favList", favList);
+  // console.log("favList", favList);
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
@@ -52,7 +52,6 @@ function ProductCard({
           ) : (
             <FavoriteIcon />
           )}
-          {/* <FavoriteIcon /> */}
         </button>
       </div>
       <div className="mb-4 lg:mt-48 mt-4">

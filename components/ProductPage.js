@@ -76,10 +76,10 @@ function ProductPage(props) {
   };
 
   const toggleShoppingCartHandler = (e, prodId) => {
+    console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {
-      // dispatch(addShoppingCart(prodId, count));
       try {
         if (count < 1) return;
         const variants = shopifyproduct.map((i) => i.variants);
@@ -92,6 +92,7 @@ function ProductPage(props) {
             quantity: Number(count),
           },
         ]);
+        dispatch(addShoppingCart(count, variantId, prodId));
         Router.push("/shoppingcart");
       } catch (e) {
         console.log(e);

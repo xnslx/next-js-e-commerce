@@ -2,7 +2,7 @@ import * as actionTypes from "../action/type";
 import { intlState } from "./index";
 
 const favoriteListReducer = (state = intlState, action) => {
-    console.log("favoriteListReducer", action);
+    // console.log("favoriteListReducer", action);
     switch (action.type) {
         case actionTypes.ADD_FAVORITE_LIST:
             return {

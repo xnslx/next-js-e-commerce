@@ -22,33 +22,22 @@ function Layout({ children }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const favList = useSelector((state) => state.favoriteList.favoriteList);
-  console.log("layoutjs", favList);
+  // console.log("layoutjs", favList);
   const shoppingCartList = useSelector((state) => state.shoppingCart);
 
-  console.log("layoutjs", shoppingCartList);
+  // console.log("layoutjs", shoppingCartList);
 
   const store = useStore().getState();
-  console.log("store", store);
+  // console.log("store", store);
 
   const [session, loading] = useSession();
 
   useEffect(async () => {
-    // getCart().then((res) => {
-    //   if (res !== undefined) {
-    //     console.log("shoppingcartjs", res.lineItems);
-    //     setHaveProducts(true);
-    //     setCartItems(res.lineItems);
-    //   } else {
-    //     setHaveProducts(false);
-    //   }
-    // });
-
     const cart = await getCart();
     if (cart !== undefined) {
       console.log("cart", cart);
-
       setHaveProducts(true);
-      // setCartItems(cart.lineItems);
+      setCartItems(cart.lineItems);
     } else {
       setHaveProducts(false);
     }
@@ -64,7 +53,7 @@ function Layout({ children }) {
     if (!session) {
       router.push("/login");
     } else {
-      // dispatch(getShoppingCart());
+      dispatch(getShoppingCart());
       router.push("/shoppingcart");
     }
   };

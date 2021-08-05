@@ -19,7 +19,7 @@ const query = `//groq
 `;
 
 function IndexPage(props) {
-  console.log("indexjs", props);
+  // console.log("indexjs", props);
   const [open, setOpen] = useState(false);
   const [listProducts, setListProducts] = useState(products);
   const [haveResult, setHaveResult] = useState(false);
@@ -32,7 +32,7 @@ function IndexPage(props) {
   };
 
   const callbackHandler = (result) => {
-    console.log("indexjs", result);
+    // console.log("indexjs", result);
     setListProducts(result);
     setHaveResult(true);
   };
@@ -59,16 +59,7 @@ function IndexPage(props) {
           content="a website to sell gently used kids' clothing"
         />
       </Head>
-      {/* {open ? <PopOver /> : null}
-      <a onClick={clickHandler}>
-        <SortFilter />
-      </a> */}
       <div className="mt-4">
-        {/* {haveResult ? (
-          <SearchResult items={listProducts} />
-        ) : (
-          <ProductsPage products={products} />
-        )} */}
         <ProductsPage products={products} />
       </div>
     </div>
@@ -86,9 +77,9 @@ export async function getStaticProps({ params = {}, preview = false }) {
       'shopifyproduct': shopifyproduct[] ->
     }
   `);
-  console.log("productsData", productsData);
-  console.log("shopifyProducts", shopifyProducts);
-  console.log("targetProducts", targetProducts);
+  // console.log("productsData", productsData);
+  // console.log("shopifyProducts", shopifyProducts);
+  // console.log("targetProducts", targetProducts);
   return {
     props: {
       preview,

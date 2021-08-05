@@ -38,11 +38,21 @@ const Favoritelist = () => {
         Favorite List
       </h3>
       {haveProducts && favoriteList && favoriteList.items ? (
-        <div className=" w-10/12 gap-2 ml-auto mr-auto mt-12 lg:grid-cols-3 xl:grid-cols-4 mt-6 lg:gap-8">
+        <div className="grid grid-cols-2 w-11/12 gap-2 ml-auto mr-auto mt-8 lg:grid-cols-3 xl:grid-cols-4 mt-6 lg:gap-8 border lg:w-9/12 ">
           {favoriteList.items.map((i, index) => (
-            <ul key={index} className="flex flex-row mb-6">
-              <Image src={i.image} height={90} width={100} />
-              <div className="ml-6">
+            <ul
+              key={index}
+              className="w-full max-w-sm mx-auto overflow-hidden border border-black"
+            >
+              <div className="h-48 lg:h-72">
+                <Image
+                  src={i.image}
+                  height={300}
+                  width={300}
+                  className="object-cover"
+                />
+              </div>
+              <div className="ml-2 mb-6">
                 <li>
                   <strong className="pr-2">Name:</strong>
                   {i.name}
@@ -55,7 +65,10 @@ const Favoritelist = () => {
                   {i.size}
                 </li>
                 <li>
-                  <button onClick={(e) => deleteHandler(e, i.prodId)}>
+                  <button
+                    onClick={(e) => deleteHandler(e, i.prodId)}
+                    className="mt-4"
+                  >
                     <DeleteIcon />
                   </button>
                 </li>
