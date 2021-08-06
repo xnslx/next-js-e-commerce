@@ -19,7 +19,7 @@ const query = `//groq
 `;
 
 function IndexPage(props) {
-  // console.log("indexjs", props);
+  console.log("indexjs", props);
   const [open, setOpen] = useState(false);
   const [listProducts, setListProducts] = useState(products);
   const [haveResult, setHaveResult] = useState(false);
