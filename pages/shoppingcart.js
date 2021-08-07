@@ -14,6 +14,7 @@ const Shoppingcart = () => {
 
   useEffect(() => {
     getCart().then((res) => {
+      console.log("res", res);
       if (res !== undefined) {
         setHaveProducts(true);
         setCartItems(res.lineItems);

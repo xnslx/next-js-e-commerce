@@ -7,7 +7,7 @@ import FavoriteIcon from "../components/ui/favorite";
 import LikedIcon from "../components/ui/liked";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { toggleFavList } from "../action/action";
+import { toggleFavList, getProductFavList } from "../action/action";
 import { useSelector, useStore } from "react-redux";
 
 function ProductCard({
@@ -26,7 +26,7 @@ function ProductCard({
 
   const favList = useSelector((state) => state.favoriteList.favoriteList);
 
-  // console.log("favList", favList);
+  console.log("favList", favList);
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {

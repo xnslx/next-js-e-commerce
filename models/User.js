@@ -33,6 +33,11 @@ const userSchema = new Schema({
                 ref: "Products",
                 required: true,
             },
+            shopifyId: {
+                type: String,
+                ref: "Products",
+                required: true,
+            },
             quantity: { type: Number, required: true },
         }, ],
     },

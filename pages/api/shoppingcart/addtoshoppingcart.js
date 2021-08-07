@@ -20,6 +20,7 @@ const toggleShoppingCart = async(req, res) => {
     const session = await getSession({ req });
     const prodId = req.body.prodId;
     const total = req.body.quantity;
+    const variantId = req.body.variantId;
     console.log("total", total);
     if (session) {
         try {
@@ -44,6 +45,7 @@ const toggleShoppingCart = async(req, res) => {
                 });
                 console.log("targetItem", targetItem);
                 targetItem.quantity = total;
+                targetItem.shopifyId = variantId;
                 // const list = shoppingcart.splice(
                 //     checkNewlyAddedItemIndex,
                 //     1,
@@ -65,6 +67,7 @@ const toggleShoppingCart = async(req, res) => {
                 const updatedList = await userShoppingCart.concat({
                     prodId: prodId,
                     quantity: total,
+                    shopifyId: variantId,
                 });
                 console.log("prodId", prodId);
                 console.log("updatedList", updatedList);
@@ -73,11 +76,11 @@ const toggleShoppingCart = async(req, res) => {
                 };
                 console.log("updatedCart", updatedCart);
                 user.shoppingCart = updatedCart;
-                user.save();
                 console.log("user.shoppingCart", user.shoppingCart);
+                user.save();
                 res.status(201).json({
                     message: "Add product to shopping cart",
-                    shoppingCart: user.shoppingCart.items,
+                    shoppingCart: updatedCart,
                 });
             }
         } catch (err) {

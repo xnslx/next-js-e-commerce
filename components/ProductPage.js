@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import Router from "next/router";
 
 function ProductPage(props) {
+  console.log("props", props);
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const handleCount = (value) =>
@@ -54,9 +55,6 @@ function ProductPage(props) {
 
   const addToCartHandler = (e, prodId, count) => {
     const enteredCount = countRef.current.value;
-    // console.log("count", count);
-    // console.log("enteredCount", enteredCount);
-    // console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {
@@ -133,18 +131,6 @@ function ProductPage(props) {
                 <div className="flex justify-center">
                   <AddIcon />
                 </div>
-
-                {/* <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> */}
               </button>
               <span className="text-2xl mx-2" ref={countRef}>
                 {count}
@@ -156,17 +142,6 @@ function ProductPage(props) {
                 <div className="flex justify-center">
                   <MinusIcon />
                 </div>
-                {/* <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> */}
               </button>
             </div>
           </div>
@@ -177,21 +152,6 @@ function ProductPage(props) {
             >
               Add to Shopping Cart
             </button>
-            {/* {shoppingCartList.includes(id) ? (
-              <button
-                className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
-                onClick={(e) => removeFromCartHandler(e, id, count)}
-              >
-                Remove product from shopping cart
-              </button>
-            ) : (
-              <button
-                className="border p-2 mb-8 border-black shadow-offset-lime w-2/3 font-bold"
-                onClick={(e) => addToCartHandler(e, id, count)}
-              >
-                Add to cart
-              </button>
-            )} */}
             <button
               className="-mt-8"
               onClick={(e) => toggleFavListHandler(e, id)}

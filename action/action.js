@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const toggleFavList = (productId) => (dispatch, getState) => {
+    console.log("toggleFavList", productId);
     axios
         .post("/api/favoritelist", { prodId: productId })
         .then((result) => {
@@ -68,6 +69,7 @@ export const addShoppingCart = (count, variantId, productId) => (
         .post("http://localhost:3000/api/shoppingcart/addtoshoppingcart", {
             prodId: productId,
             quantity: count,
+            variantId: variantId,
         })
         .then((result) => {
             console.log("actionjs2", result);

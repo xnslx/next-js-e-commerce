@@ -40,6 +40,10 @@ const productsSchema = new Schema({
         type: String,
         required: true,
     },
+    shopifyId: {
+        type: String,
+        required: true,
+    },
 });
 
 module.exports =
