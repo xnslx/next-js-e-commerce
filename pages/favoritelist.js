@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import Router from "next/router";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 import EmptyState from "../components/ui/emptystate";
 import DeleteIcon from "../components/ui/delete";
@@ -17,6 +19,7 @@ const Favoritelist = () => {
   console.log("favoriteList", favoriteList);
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
+  const [selected, setSelected] = useState("");
   const handleCount = (value) =>
     !(count === 0 && value === -1) ? setCount(count + value) : count;
 
@@ -40,18 +43,27 @@ const Favoritelist = () => {
   };
 
   const toggleShoppingCartHandler = (e, shopifyId) => {
+    console.log("selected", selected);
     try {
       if (count < 1) return;
       addProductToCart([
         {
           variantId: shopifyId,
-          quantity: Number(count),
+          quantity: selected,
         },
       ]);
       Router.push("/shoppingcart");
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const defaultOption = options[0];
+
+  const selectHandler = (option) => {
+    console.log("You selected", option);
+    setSelected(option.value);
   };
 
   return (
@@ -94,24 +106,14 @@ const Favoritelist = () => {
                     <DeleteIcon />
                   </button>
                 </li>
-                <li className="flex items-center mt-4">
-                  <button
-                    onClick={() => handleCount(1)}
-                    className="border border-black w-16 h-10 text-gray-500 focus:outline-none focus:text-gray-600 lg:w-28"
-                  >
-                    <div className="flex justify-center">
-                      <AddIcon />
-                    </div>
-                  </button>
-                  <span className="text-1xl mx-2">{count}</span>
-                  <button
-                    onClick={() => handleCount(-1)}
-                    className="border border-black w-16 h-10 text-gray-500 focus:outline-none focus:text-gray-600 lg:w-28"
-                  >
-                    <div className="flex justify-center">
-                      <MinusIcon />
-                    </div>
-                  </button>
+                <li>
+                  <Dropdown
+                    options={options}
+                    onChange={selectHandler}
+                    value={defaultOption}
+                    placeholder="Select an option"
+                    controlClassName="h-10 w-36 mt-4 lg:w-11/12"
+                  />
                 </li>
                 <li>
                   <button
