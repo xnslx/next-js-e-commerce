@@ -25,7 +25,11 @@ const addProductToCart = async(product) => {
     await storeCart(cart);
 };
 const getCart = async() => {
-    return JSON.parse(window.localStorage.getItem("cart"));
+    if (typeof window !== "undefined" && window.localStorage.getItem("cart")) {
+        return JSON.parse(window.localStorage.getItem("cart"));
+    } else {
+        return null;
+    }
 };
 
 const storeCart = async({

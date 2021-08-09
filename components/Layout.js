@@ -23,7 +23,11 @@ function Layout({ children }) {
   const router = useRouter();
   const favList = useSelector((state) => state.favoriteList.favoriteList);
   // console.log("layoutjs", favList);
-  const shoppingCartList = useSelector((state) => state.shoppingCart);
+  const shoppingCartList = useSelector(
+    (state) => state.shoppingCart.shoppingCart
+  );
+
+  console.log("shoppingCartList", shoppingCartList);
 
   // console.log("layoutjs", shoppingCartList);
 
@@ -32,16 +36,16 @@ function Layout({ children }) {
 
   const [session, loading] = useSession();
 
-  useEffect(async () => {
-    const cart = await getCart();
-    if (cart !== undefined) {
-      console.log("cart", cart);
-      setHaveProducts(true);
-      setCartItems(cart.lineItems);
-    } else {
-      setHaveProducts(false);
-    }
-  }, [shoppingCartList, favList]);
+  // useEffect(() => {
+  //   const cart = getCart();
+  //   if (cart !== undefined && session) {
+  //     console.log("cart", cart);
+  //     setHaveProducts(true);
+  //     setCartItems(cart.lineItems);
+  //   } else {
+  //     setHaveProducts(false);
+  //   }
+  // }, [shoppingCartList, favList]);
 
   const logoutHandler = () => {
     signOut();
@@ -95,7 +99,11 @@ function Layout({ children }) {
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
                 <ShoppingCartIcon />
-                {session && cartItems ? <span>{cartItems.length}</span> : ""}
+                {session && shoppingCartList ? (
+                  <span>{shoppingCartList.items.length}</span>
+                ) : (
+                  ""
+                )}
               </button>
               <div className="flex sm:hidden">
                 <button

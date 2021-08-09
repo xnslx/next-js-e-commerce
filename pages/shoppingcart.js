@@ -7,6 +7,7 @@ import EmptyState from "../components/ui/emptystate";
 import ShoppingCartItems from "../components/shoppingcartitems";
 import Router from "next/router";
 import { getCart } from "../utils/shopify";
+import { get } from "js-cookie";
 
 const Shoppingcart = () => {
   const [haveProducts, setHaveProducts] = useState(false);

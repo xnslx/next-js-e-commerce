@@ -91,7 +91,7 @@ function ProductPage(props) {
           },
         ]);
         dispatch(addShoppingCart(count, variantId, prodId));
-        Router.push("/shoppingcart");
+        // Router.push("/shoppingcart");
       } catch (e) {
         console.log(e);
       }
