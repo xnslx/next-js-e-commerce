@@ -37,7 +37,6 @@ function Login(props) {
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
-        console.log(result);
       } catch (error) {
         console.log(error);
       }

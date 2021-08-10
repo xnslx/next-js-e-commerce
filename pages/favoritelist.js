@@ -16,7 +16,6 @@ const Favoritelist = () => {
   const [haveProducts, setHaveProducts] = useState(false);
   const [favItems, setFavItems] = useState([]);
   const favoriteList = useSelector((state) => state.favoriteList.favoriteList);
-  console.log("favoriteList", favoriteList);
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [selected, setSelected] = useState("");
@@ -33,9 +32,6 @@ const Favoritelist = () => {
     }
   }, []);
 
-  console.log("favoriteList ", favoriteList.items);
-  console.log("favItems", favItems);
-
   const deleteHandler = (e, prodId) => {
     dispatch(toggleFavList(prodId));
     dispatch(getProductFavList());
@@ -43,7 +39,6 @@ const Favoritelist = () => {
   };
 
   const toggleShoppingCartHandler = (e, shopifyId) => {
-    console.log("selected", selected);
     try {
       if (count < 1) return;
       addProductToCart([
@@ -62,7 +57,6 @@ const Favoritelist = () => {
   const defaultOption = options[0];
 
   const selectHandler = (option) => {
-    console.log("You selected", option);
     setSelected(option.value);
   };
 

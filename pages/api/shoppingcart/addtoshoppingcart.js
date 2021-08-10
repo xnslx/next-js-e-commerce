@@ -21,16 +21,12 @@ const toggleShoppingCart = async(req, res) => {
     const prodId = req.body.prodId;
     const total = req.body.quantity;
     const variantId = req.body.variantId;
-    console.log("total", total);
     if (session) {
         try {
             const client = connectToDatabase();
             const user = await User.findOne({ email: session.user.email });
-            console.log("user", user);
             const product = await Products.findOne({ prodId: prodId });
-            console.log("product", product);
             const shoppingcart = user.shoppingCart.items;
-            console.log("shoppingcart", shoppingcart);
             const checkNewlyAddedItemIndex = shoppingcart
                 .map((item) => item.prodId)
                 .indexOf(prodId);
@@ -43,18 +39,9 @@ const toggleShoppingCart = async(req, res) => {
                         return i;
                     }
                 });
-                console.log("targetItem", targetItem);
                 targetItem.quantity = total;
                 targetItem.shopifyId = variantId;
-                // const list = shoppingcart.splice(
-                //     checkNewlyAddedItemIndex,
-                //     1,
-                //     targetItem
-                // );
-                // console.log("list", list);
-                // shoppingcart[checkNewlyAddedItemIndex] = list;
                 user.shoppingCart = shoppingcart;
-                console.log("shoppingcart", shoppingcart);
                 user.save();
                 res.status(201).json({
                     message: "Add product to shopping cart",
@@ -63,20 +50,15 @@ const toggleShoppingCart = async(req, res) => {
             } else if (checkNewlyAddedItemIndex < 0) {
                 // no item found in the shopping cart, add item with quantity to the shopping cart
                 const userShoppingCart = user.shoppingCart.items;
-                console.log("userShoppingCart", userShoppingCart);
                 const updatedList = await userShoppingCart.concat({
                     prodId: prodId,
                     quantity: total,
                     shopifyId: variantId,
                 });
-                console.log("prodId", prodId);
-                console.log("updatedList", updatedList);
                 const updatedCart = {
                     items: updatedList,
                 };
-                console.log("updatedCart", updatedCart);
                 user.shoppingCart = updatedCart;
-                console.log("user.shoppingCart", user.shoppingCart);
                 user.save();
                 res.status(201).json({
                     message: "Add product to shopping cart",

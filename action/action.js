@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const toggleFavList = (productId) => (dispatch, getState) => {
-    console.log("toggleFavList", productId);
+    // console.log("toggleFavList", productId);
     axios
         .post("/api/favoritelist", { prodId: productId })
         .then((result) => {
-            console.log("result", result);
+            // console.log("result", result);
             dispatch({
                 type: "ADD_FAVORITE_LIST",
                 payload: result.data,
@@ -23,7 +23,7 @@ export const getProductFavList = () => (dispatch) => {
     axios
         .get("http://localhost:3000/api/favoritelist")
         .then((result) => {
-            console.log("result", result);
+            // console.log("result", result);
             dispatch({
                 type: "GET_PRODUCT_FAVORITE_LIST",
                 payload: result.data,
@@ -62,9 +62,6 @@ export const addShoppingCart = (count, variantId, productId) => (
     dispatch,
     getState
 ) => {
-    console.log("productId", productId);
-    console.log("count", count);
-    console.log("variantId", variantId);
     axios
         .post("http://localhost:3000/api/shoppingcart/addtoshoppingcart", {
             prodId: productId,
@@ -96,7 +93,6 @@ export const removeShoppingCart = (productId, count) => (
             quantity: count,
         })
         .then((result) => {
-            console.log("result", result);
             dispatch({
                 type: "REMOVE_SHOPPING_CART",
                 payload: productId,
@@ -114,7 +110,6 @@ export const getShoppingCart = () => (dispatch) => {
     axios
         .get("http://localhost:3000/api/shoppingcart/addtoshoppingcart")
         .then((result) => {
-            console.log("getShoppingCart", result);
             dispatch({
                 type: "GET_SHOPPING_CART",
                 payload: result.data,

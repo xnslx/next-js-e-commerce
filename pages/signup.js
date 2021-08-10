@@ -36,7 +36,6 @@ function Signup(props) {
     if (!response.ok) {
       console.log(data);
     }
-    console.log("data", data);
 
     if (data.message !== null) {
       setError(data.message);

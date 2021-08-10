@@ -26,8 +26,6 @@ function ProductCard({
 
   const favList = useSelector((state) => state.favoriteList.favoriteList);
 
-  // console.log("favList", favList);
-
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
       router.push("/login");

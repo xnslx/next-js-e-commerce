@@ -15,7 +15,6 @@ const Shoppingcart = () => {
 
   useEffect(() => {
     getCart().then((res) => {
-      console.log("res", res);
       if (res !== undefined) {
         setHaveProducts(true);
         setCartItems(res.lineItems);
@@ -24,39 +23,6 @@ const Shoppingcart = () => {
       }
     });
   }, []);
-
-  console.log("cartItems", cartItems);
-  // const shoppingCartList = useSelector(
-  //   (state) => state.shoppingCart.shoppingCart.cart
-  // );
-
-  // const itemsQuantity = useSelector(
-  //   (state) => state.shoppingCart.shoppingCart.items
-  // );
-
-  // console.log("itemsQuantity", itemsQuantity);
-
-  // const test = arrayUnique(itemsQuantity, shoppingCartList);
-
-  // const cartItems = itemsQuantity.reduce((acc, item) => {
-  //   // console.log("acc", acc);
-  //   // console.log("item", item);
-  //   const foundItem = shoppingCartList.find((i) => i.prodId === item.prodId);
-  //   return foundItem
-  //     ? [...acc, { foundItem, quantity: item.quantity }]
-  //     : [...acc];
-  // }, []);
-  // console.log("cartItems", cartItems);
-
-  // useEffect(() => {
-  //   if (shoppingCartList == null) {
-  //     setHaveProducts(false);
-  //   } else {
-  //     setHaveProducts(true);
-  //   }
-  // }, []);
-
-  // console.log("shoppingcart", shoppingCartList);
   return (
     <>
       <div>

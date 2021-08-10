@@ -11,8 +11,6 @@ import {
 const query = groq`*[_type == "product" && slug.current == $slug][0]`;
 
 function ProductPageContainer({ productData, targetProduct, preview }) {
-  console.log("targetProduct ", targetProduct);
-  console.log("productData", productData);
   const router = useRouter();
   if (!router.isFallback && !targetProduct?.slug) {
     return <Error statusCode={404} />;
@@ -37,7 +35,6 @@ function ProductPageContainer({ productData, targetProduct, preview }) {
     slug,
   } = product;
   const { shopifyproduct } = targetProduct;
-  console.log("shopifyproduct", shopifyproduct);
 
   return (
     <ProductPage
@@ -57,7 +54,6 @@ function ProductPageContainer({ productData, targetProduct, preview }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  console.log("params", params);
   const productData = await getClient(preview).fetch(query, {
     slug: params.slug,
   });
@@ -81,34 +77,10 @@ export async function getStaticPaths() {
     `*[_type == "product" && defined(slug.current)][].slug.current`
   );
 
-  console.log("paths", paths);
-
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
     fallback: true,
   };
 }
-
-// export const getServerSideProps = async (context) => {
-//   const pageSlug = context.query.slug;
-//   const query = `*[_type == "product" && slug.current == $pageSlug][0]{
-//     ...,
-//     'shopifyproduct': shopifyproduct[] ->
-//   }`;
-
-//   const targetProducts = await sanityClient.fetch(query, { pageSlug });
-//   if (!targetProducts) {
-//     return {
-//       props: null,
-//       notFound: true,
-//     };
-//   } else {
-//     return {
-//       props: {
-//         targetProducts,
-//       },
-//     };
-//   }
-// };
 
 export default ProductPageContainer;

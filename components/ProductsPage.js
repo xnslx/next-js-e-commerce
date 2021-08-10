@@ -10,12 +10,10 @@ import { sanityClient } from "../utils/sanity";
 import Tags from "./tags";
 
 function ProductsPage({ products }) {
-  // console.log("productspage", products);
   const summerTagSelectionHandler = () => {
     sanityClient
       .fetch(`*[_type == "product" && "summer" in tags]`)
       .then((data) => {
-        console.log(data);
         setHaveItems(true);
         setSelectedProducts(data);
       });
@@ -25,7 +23,6 @@ function ProductsPage({ products }) {
     sanityClient
       .fetch(`*[_type == "product" && "fall" in tags]`)
       .then((data) => {
-        console.log(data);
         setHaveItems(true);
         setSelectedProducts(data);
       });
@@ -35,7 +32,6 @@ function ProductsPage({ products }) {
     sanityClient
       .fetch(`*[_type == "product" && "pants" in tags]`)
       .then((data) => {
-        console.log(data);
         setHaveItems(true);
         setSelectedProducts(data);
       });
@@ -45,7 +41,6 @@ function ProductsPage({ products }) {
     sanityClient
       .fetch(`*[_type == "product" && "top" in tags]`)
       .then((data) => {
-        console.log(data);
         setHaveItems(true);
         setSelectedProducts(data);
       });
@@ -55,7 +50,6 @@ function ProductsPage({ products }) {
     sanityClient
       .fetch(`*[_type == "product" && "newly" in tags]`)
       .then((data) => {
-        console.log(data);
         setHaveItems(true);
         setSelectedProducts(data);
       });

@@ -9,8 +9,6 @@ const query = groq`*[_type == "route" && slug.current == $slug][0]{
 }`;
 
 function ProductPageContainer({ pageData, preview, slug }) {
-  // console.log("pageData", pageData);
-  // console.log("preview", preview);
   const router = useRouter();
   if (!router.isFallback && !pageData) {
     return <Error statusCode={404} />;

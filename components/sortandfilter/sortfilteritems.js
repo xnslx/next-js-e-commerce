@@ -4,16 +4,12 @@ import { gender, size, category } from "./sortandfilerchoices";
 import { useRouter } from "next/router";
 
 const SortFilterItems = (props) => {
-  // console.log('sortfilteritems', props)
   const productsGender = gender;
   const productsSize = size;
   const productsCategory = category;
 
   const [checkedItems, setCheckedItems] = useState({});
   const [meetRequirementItems, setMeetRequirementItems] = useState([]);
-
-  // console.log('checkedItems', checkedItems)
-  // console.log('meetRequirementItems',meetRequirementItems)
 
   const router = useRouter();
 
@@ -50,24 +46,6 @@ const SortFilterItems = (props) => {
       pathname: "/filterresult",
       query: params,
     });
-    // const response = await fetch("/api/filterresult?" + params, {
-    //   method: "POST",
-    //   "Content-Type": "application/json",
-    // });
-
-    // const data = await response.json();
-    // console.log("data", data);
-    // console.log("response", response);
-    // if (data.products) {
-    //   props.cbHandler(data.products);
-    //   router.push({
-    //     pathname: "/filterresult",
-    //     query: params,
-    //   });
-
-    //   setMeetRequirementItems(data.products);
-    // }
-    // return;
   };
 
   return (

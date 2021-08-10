@@ -22,30 +22,11 @@ function Layout({ children }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const favList = useSelector((state) => state.favoriteList.favoriteList);
-  // console.log("layoutjs", favList);
   const shoppingCartList = useSelector(
     (state) => state.shoppingCart.shoppingCart
   );
 
-  console.log("shoppingCartList", shoppingCartList);
-
-  // console.log("layoutjs", shoppingCartList);
-
-  const store = useStore().getState();
-  // console.log("store", store);
-
   const [session, loading] = useSession();
-
-  // useEffect(() => {
-  //   const cart = getCart();
-  //   if (cart !== undefined && session) {
-  //     console.log("cart", cart);
-  //     setHaveProducts(true);
-  //     setCartItems(cart.lineItems);
-  //   } else {
-  //     setHaveProducts(false);
-  //   }
-  // }, [shoppingCartList, favList]);
 
   const logoutHandler = () => {
     signOut();
@@ -171,10 +152,6 @@ function Layout({ children }) {
           </nav>
         </div>
       </header>
-      {/*
-      // This Cart doesn't really work… yet!
-      <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
-      */}
       <main className="my-8">{children}</main>
       {/* <footer className="bg-gray-200 w-full fixed bottom-0">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">

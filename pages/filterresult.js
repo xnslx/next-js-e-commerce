@@ -17,7 +17,6 @@ const SearchResult = () => {
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const router = useRouter();
-  console.log("router", router);
   const { query } = router;
   const params = Object.entries(query)
     .map(([key, value]) => {
@@ -31,18 +30,13 @@ const SearchResult = () => {
     })
     .join("&");
 
-  console.log("params", params);
-
   useEffect(() => {
-    console.log(params);
     async function getData() {
       const response = await fetch("/api/filterresult?" + params, {
         method: "POST",
         "Content-Type": "application/json",
       });
       const data = await response.json();
-      console.log("data", data);
-      console.log("response", response);
       if (data.products == null) {
         setHaveData(false);
       } else {
@@ -52,12 +46,6 @@ const SearchResult = () => {
     }
     getData();
   }, []);
-
-  console.log("resultProducts", resultProducts);
-
-  //   if (products !== null) {
-  //     setHaveData(true);
-  //   }
 
   const toggleFavHandler = (e, prodId) => {
     if (!session) {
@@ -105,41 +93,5 @@ const SearchResult = () => {
     </>
   );
 };
-
-// export async function getStaticProps(context) {
-//   console.log("context", context);
-//   const { query } = context;
-//   console.log("query", query);
-//   let result = Object.entries(query)
-//     .map(([key, value]) => {
-//       if (key === "gender") {
-//         return "gender=" + query[key];
-//       } else if (key === "size") {
-//         return "size=" + query[key];
-//       } else {
-//         return "category=" + query[key];
-//       }
-//     })
-//     .join("&");
-
-//   console.log("result", result);
-
-//   const response = await fetch(
-//     "http://localhost:3000/api/filterresult?" + result,
-//     {
-//       method: "POST",
-//       "Content-Type": "application/json",
-//     }
-//   );
-
-//   const data = await response.json();
-//   console.log("data", data);
-
-//   return {
-//     props: {
-//       products: data.products || null,
-//     },
-//   };
-// }
 
 export default SearchResult;

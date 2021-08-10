@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 import Router from "next/router";
 
 function ProductPage(props) {
-  console.log("props", props);
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const handleCount = (value) =>
@@ -29,8 +28,6 @@ function ProductPage(props) {
     shopifyproduct,
   } = props;
 
-  console.log("shopifyproduct", shopifyproduct);
-
   const [session, loading] = useSession();
   const router = useRouter();
 
@@ -41,8 +38,6 @@ function ProductPage(props) {
   );
 
   const favList = useSelector((state) => state.favoriteList.favoriteList);
-
-  console.log("productpage", favList);
 
   const toggleFavListHandler = (e, prodId) => {
     console.log("prodId", prodId);
@@ -64,8 +59,6 @@ function ProductPage(props) {
 
   const removeFromCartHandler = (e, prodId, count) => {
     const enteredCount = countRef.current.value;
-    console.log(count);
-    console.log("prodId", prodId);
     if (!session) {
       router.push("/login");
     } else {
