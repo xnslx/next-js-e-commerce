@@ -1,3 +1,3 @@
-import { webhooks } from "../src/webhooks";
+import { webhooks } from "../../studio/src/webhooks";
 
 export default webhooks.onCollectionDelete;
