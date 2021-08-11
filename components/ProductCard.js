@@ -44,7 +44,7 @@ function ProductCard({
         <a href={`/products/${slug.current}`}>
           <img src={urlFor(mainImage)} alt="" />
         </a>
-        <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-2 ml-2">
+        <button onClick={(e) => toggleFavHandler(e, _id)} className="mt-6 ml-2">
           {session && favList && favList.favIds.includes(_id) ? (
             <LikedIcon />
           ) : (
@@ -52,7 +52,7 @@ function ProductCard({
           )}
         </button>
       </div>
-      <div className="mb-4 lg:mt-48 mt-4">
+      <div className="mb-4 lg:mt-48 mt-8 lg:pt-8">
         <h3 className="ml-2 text-lg font-bold uppercase">{title}</h3>
         <div className="flex flex-col">
           <span className="ml-2 text-lg leading-7">
