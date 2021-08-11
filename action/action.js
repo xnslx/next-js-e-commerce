@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const toggleFavList = (productId) => (dispatch, getState) => {
-    // console.log("toggleFavList", productId);
     axios
-        .post("/api/favoritelist", { prodId: productId })
+        .post("https://next-js-e-commerce-xnslx.vercel.app/api/favoritelist", {
+            prodId: productId,
+        })
         .then((result) => {
-            // console.log("result", result);
             dispatch({
                 type: "ADD_FAVORITE_LIST",
                 payload: result.data,
@@ -21,9 +21,8 @@ export const toggleFavList = (productId) => (dispatch, getState) => {
 
 export const getProductFavList = () => (dispatch) => {
     axios
-        .get("http://localhost:3000/api/favoritelist")
+        .get("https://next-js-e-commerce-xnslx.vercel.app/api/favoritelist")
         .then((result) => {
-            // console.log("result", result);
             dispatch({
                 type: "GET_PRODUCT_FAVORITE_LIST",
                 payload: result.data,
@@ -63,11 +62,13 @@ export const addShoppingCart = (count, variantId, productId) => (
     getState
 ) => {
     axios
-        .post("http://localhost:3000/api/shoppingcart/addtoshoppingcart", {
-            prodId: productId,
-            quantity: count,
-            variantId: variantId,
-        })
+        .post(
+            "https://next-js-e-commerce-xnslx.vercel.app/api/shoppingcart/addtoshoppingcart", {
+                prodId: productId,
+                quantity: count,
+                variantId: variantId,
+            }
+        )
         .then((result) => {
             console.log("actionjs2", result);
             dispatch({
@@ -88,10 +89,12 @@ export const removeShoppingCart = (productId, count) => (
     getState
 ) => {
     axios
-        .post("http://localhost:3000/api/shoppingcart/removefromshoppingcart", {
-            prodId: productId,
-            quantity: count,
-        })
+        .post(
+            "https://next-js-e-commerce-xnslx.vercel.app/api/shoppingcart/removefromshoppingcart", {
+                prodId: productId,
+                quantity: count,
+            }
+        )
         .then((result) => {
             dispatch({
                 type: "REMOVE_SHOPPING_CART",
@@ -108,7 +111,9 @@ export const removeShoppingCart = (productId, count) => (
 
 export const getShoppingCart = () => (dispatch) => {
     axios
-        .get("http://localhost:3000/api/shoppingcart/addtoshoppingcart")
+        .get(
+            "https://next-js-e-commerce-xnslx.vercel.app/api/shoppingcart/addtoshoppingcart"
+        )
         .then((result) => {
             dispatch({
                 type: "GET_SHOPPING_CART",
