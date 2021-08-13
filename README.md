@@ -49,4 +49,4 @@ SANITY_TOKEN =
 
 <p>Here is the demo. 👉<strong>https://next-js-e-commerce-xnslx.vercel.app/</strong></p>
 
-<p>If you like the project, don't forget to give me a star🌟 or <a href="https://www.buymeacoffee.com/xianl">buy me a coffee</a>. </p>
+<p>If you like the project, don't forget to give me a star🌟 or <a href="https://ko-fi.com/xianl18242">buy me a coffee</a>. </p>
