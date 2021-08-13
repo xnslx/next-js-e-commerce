@@ -1,45 +1,52 @@
-# Sanity.io and Next.js Ecommerce Starter
+# This is a Nextjs Tailwind CSS SanityIo eCommerce website. It also integrates Shopify Storefront API for checkout and payment.
 
-This is an e-commerce *starter* that features a studio with a simple Next.js frontend.
+<img src="https://github.com/xnslx/next-js-e-commerce/blob/master/assets/ezgif.com-gif-maker%20(24).gif" width="600" height="auto">
 
-This starter uses the [Next.js toolkit for Sanity.io](https://github.com/sanity-io/next-sanity).
+## Introduction
+<p>Hey everyone, 🖐 welcome to my Nextjs Tailwind CSS SanityIo eCommerce website. I also integrate Shopify Storefront API for checkingout and payment.</p>
 
-Note: This starter is an example of e-commerce content models and layout. It doesn't come with a full cart and fulfilmment solution. If you're interested in how to integrate Sanity with a e-commerce solution, do [join our community](https://slack.sanity.io).
+## Stack
+<p>The stack: </br>Nextjs - frontend </br>Tailwind CSS - styling </br> SanityIo - CMS </br> Redux-Persist - global state management </br> Next-Auth - authentication
+</br> Shopify Storefront API - checkout and payment</br>
+</p>
 
-**Features:**
+## Getting Started
 
-* Live previews, including website preview for products
-* Frontend with product pages styled using Tailwind.css
-* Content types for products, ads, pages, routes, popup shops, social media
+First, run the development server:
 
-This starter comes with an intentionally sparse frontend for just products and super simple landing pages. The fun is building and tweaking it yourself?
-
-## Getting started
-
-The quickest way to get up and running is to go to https://www.sanity.io/create?template=sanity-io%2Fsanity-template-nextjs-ecommerce and create a new project by following the instructions there.
-
-## Enabling live preview
-
-You can append `?preview` to the landing pages, product pages and the products overview to enable preview mode when you are logged into your Sanity project. For example:
-
-`https://<your-project>.vercel.app/products/roji?preview`
-
-You can find the code for the in-studio preview over in `/studio/src/components/product`.
-
-## Running Locally
-
-To run locally, rename `.env.test` to `.env` and add your project ID from [manage.sanity.io](https://manage.sanity.io).
-
-If you have already set up deployments on Vercel, you can also do `vercel env pull` to copy environment variables to your development environment.
-
-NOTE: If your Vercel project is set up to use the Next.js framework preset, you'll have to go to the project settings under https://vercel.com and under Build & Develpment change the _development command_ to: `npm run dev`
-
-To start the development server:
 ```bash
-npm start
+npm run dev
+# or
+yarn dev
 ```
-This will run the frontend at http://localhost:3000 and the Sanity Studio at http://localhost:3000/studio
+Seond, create ```.env``` file and add your own credentials.
+```
+# For Studio Locally
+SANITY_STUDIO_API_PROJECT_ID = 
+SANITY_STUDIO_API_DATASET = 
 
-## Credits
+# For Next Locally
+NEXT_PUBLIC_SANITY_DATASET = 
 
-The e-commerce frontend is built with Tailwind components by [khatabwedaa](https://tailwindcomponents.com/u/khatabwedaa).
+MONGODB_ATLAS = 
+
+NEXTAUTH_URL = 
+
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+TWITTER_CLIENT_ID = 
+TWITTER_CLIENT_SECRET=
+
+GOOGLE_CLIENT_ID = 
+GOOGLE_CLIENT_SECRET=
+
+STOREFRONT_ACCESS_TOKEN =
+SHOPIFY_URL = 
+
+SANITY_TOKEN = 
+```
+
+<p>Here is the demo. 👉<strong>https://next-js-e-commerce-xnslx.vercel.app/</strong></p>
+
+<p>If you like the project, don't forget to give me a star🌟 or <a href="https://ko-fi.com/xianl18242">buy me a coffee</a>. </p>
