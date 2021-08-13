@@ -2,8 +2,8 @@ import Client from "shopify-buy";
 
 // Initializing a client to return content in the store's primary language
 export const client = Client.buildClient({
-    domain: process.env.SHOPIFY_URL,
-    storefrontAccessToken: process.env.STOREFRONT_ACCESS_TOKEN,
+    domain: "boyandgirlshops.myshopify.com",
+    storefrontAccessToken: "e97d69ee571ca7df5808deaf6d64348e",
 });
 
 import Cookies from "js-cookie";
