@@ -1,4 +1,4 @@
-# This is a Nextjs Tailwind CSS SanityIo eCommerce website.
+# This is a Nextjs Tailwind CSS SanityIo eCommerce website. It also integrates Shopify Storefront API for checkout and payment.
 
 <img src="https://github.com/xnslx/next-js-e-commerce/blob/master/assets/ezgif.com-gif-maker%20(24).gif" width="600" height="auto">
 
